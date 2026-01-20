@@ -71,10 +71,7 @@ export default function Footer() {
                 <div className="ftBottom">
                     <div className="ftCopy">© {new Date().getFullYear()} Janet Esthetics. All rights reserved.</div>
 
-                    <div className="ftBottomLinks">
-                        <Link className="ftBottomLink" href="/policies/privacy">Privacy Policy</Link>
-                        <Link className="ftBottomLink" href="/policies/terms">Terms of Service</Link>
-                    </div>
+
                 </div>
             </Container>
 
