@@ -20,6 +20,9 @@ const sans = Inter({
 
 export const metadata = {
     title: "Janet Esthetics",
+    icons: {
+        icon: "/favicon.ico"
+    },
     description: "Private Esthetic Studio",
 };
 
@@ -35,3 +38,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </html>
     );
 }
+
