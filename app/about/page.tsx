@@ -13,8 +13,13 @@ export default function AboutPage() {
         <section className="about">
             <Container>
                 <div className="topGrid">
-                    {/* LEFT COPY */}
-                    <div>
+                    {/* ✅ СНАЧАЛА фото (на мобилке будет сверху) */}
+                    <div className="rightCol">
+                        <PortraitCarousel />
+                    </div>
+
+                    {/* ✅ ПОТОМ текст */}
+                    <div className="leftCol">
                         <Reveal>
                             <div className="kicker">About the Founder</div>
                         </Reveal>
@@ -31,8 +36,8 @@ export default function AboutPage() {
 
                         <Reveal delay={0.12} y={16}>
                             <p className="lead">
-                                Janet Esthetics is a private studio built for clients who want results — without the rush, noise, or “assembly-line” appointments. Every
-                                detail is designed to slow the experience down and focus on what matters: skin health, comfort, and trust.
+                                Janet Esthetics is a private studio built for clients who want results — without the rush, noise, or “assembly-line” appointments. Every detail is
+                                designed to slow the experience down and focus on what matters: skin health, comfort, and trust.
                             </p>
                         </Reveal>
 
@@ -51,18 +56,13 @@ export default function AboutPage() {
                         <Reveal delay={0.26} y={12}>
                             <div className="body">
                                 <p>
-                                    This practice was created as a response to an industry that often prioritizes trends over technique. Here, treatments are never rushed. We
-                                    start by listening — and by building a plan that makes sense for your skin.
+                                    This practice was created as a response to an industry that often prioritizes trends over technique. Here, treatments are never rushed. We start by
+                                    listening — and by building a plan that makes sense for your skin.
                                 </p>
-                                <p>
-                                    Janet’s philosophy is simple: true beauty is a practice. It’s what happens when skin is healthy, cared for, and respected over time.
-                                </p>
+                                <p>Janet’s philosophy is simple: true beauty is a practice. It’s what happens when skin is healthy, cared for, and respected over time.</p>
                             </div>
                         </Reveal>
                     </div>
-
-                    {/* RIGHT */}
-                    <PortraitCarousel />
                 </div>
             </Container>
 
@@ -70,6 +70,7 @@ export default function AboutPage() {
         .about{
           padding: 92px 0 72px;
           position: relative;
+          overflow: hidden; /* ✅ чтобы ничего не наезжало странно */
           background:
             radial-gradient(1200px 700px at 20% 5%, rgba(184,150,74,0.12), rgba(255,255,255,0) 60%),
             radial-gradient(1000px 600px at 90% 10%, rgba(46,42,37,0.10), rgba(255,255,255,0) 70%);
@@ -81,6 +82,9 @@ export default function AboutPage() {
           gap: 56px;
           align-items: start;
         }
+
+        .leftCol{ position: relative; z-index: 1; }
+        .rightCol{ position: relative; z-index: 1; }
 
         .kicker{
           font-size: 12px;
@@ -128,8 +132,19 @@ export default function AboutPage() {
         .body p{ margin: 0; }
         .body p + p{ margin-top: 18px; }
 
+        /* ✅ МОБИЛКА: 1 колонка, СНАЧАЛА карусель, ПОТОМ текст */
         @media (max-width: 980px){
-          .topGrid{ grid-template-columns: 1fr; gap: 28px; }
+          .topGrid{
+            grid-template-columns: 1fr;
+            gap: 22px;
+          }
+
+          /* ✅ УБИРАЕМ overlap полностью */
+          .rightCol{
+            margin-top: 0 !important;
+            z-index: 1;
+          }
+
           .title{ font-size: 44px; }
         }
 
@@ -157,7 +172,6 @@ function PortraitCarousel() {
     const [index, setIndex] = useState(0);
     const [dir, setDir] = useState<1 | -1>(1);
 
-    // если нет фото — показываем люксовый placeholder
     const [imgOk, setImgOk] = useState<Record<number, boolean>>({});
 
     const go = useCallback(
@@ -172,7 +186,6 @@ function PortraitCarousel() {
     const next = useCallback(() => go(index + 1), [go, index]);
     const prev = useCallback(() => go(index - 1), [go, index]);
 
-    // ✅ Autoplay (останавливаем на hover)
     const [paused, setPaused] = useState(false);
     useEffect(() => {
         if (reduce) return;
@@ -218,13 +231,11 @@ function PortraitCarousel() {
                                 if (info.offset.x > 60) prev();
                             }}
                         >
-                            {/* ✅ placeholder всегда рендерим как фон */}
                             <div className="placeholder" aria-hidden="true">
                                 <div className="mono">JE</div>
                                 <div className="phText">Founder portraits • Coming soon</div>
                             </div>
 
-                            {/* ✅ реальную картинку показываем только если файл реально существует */}
                             <Image
                                 src={slides[index].src}
                                 alt={slides[index].alt}
@@ -246,7 +257,6 @@ function PortraitCarousel() {
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* Controls */}
                     <button className="nav left" type="button" onClick={prev} aria-label="Previous photo">
                         ‹
                     </button>
@@ -254,7 +264,6 @@ function PortraitCarousel() {
                         ›
                     </button>
 
-                    {/* Dots */}
                     <div className="dots" role="tablist" aria-label="Choose photo">
                         {slides.map((_, i) => {
                             const active = i === index;
@@ -271,7 +280,6 @@ function PortraitCarousel() {
                         })}
                     </div>
 
-                    {/* bottom label */}
                     <div className="label">
                         <span className="bullet" />
                         Founder • Esthetic Specialist

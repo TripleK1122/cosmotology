@@ -1,8 +1,8 @@
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import SakuraPetals from "@/components/ui/SakuraPetals";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import type { Metadata } from "next";
 
 const serif = Cormorant_Garamond({
     subsets: ["latin"],
@@ -18,26 +18,27 @@ const sans = Inter({
     display: "swap",
 });
 
-// Убрали icons из metadata, чтобы не было конфликта
-export const metadata = {
+export const metadata: Metadata = {
     title: "Janet Esthetics",
+
+    // ✅ Вариант 1 (рекомендую): файл лежит в /public/icon.png
+    icons: {
+        icon: [
+            { url: "/icon.png?v=3", type: "image/png" },
+        ],
+    },
+
+    // (опционально) чтобы на iPhone добавлялось красиво:
+    // icons: {
+    //   icon: [{ url: "/icon.png?v=3", type: "image/png" }],
+    //   apple: [{ url: "/apple-touch-icon.png?v=3" }],
+    // },
 };
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className={`${serif.variable} ${sans.variable}`}>
-            <head>
-                {/* Принудительно задаём favicon для вкладки */}
-                <link rel="icon" href="/icon.png?v=3" sizes="any" />
-                {/* Если захочешь PNG: добавь файл /public/favicon-32.png и раскомментируй */}
-                {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3" /> */}
-            </head>
             <body>
-                <SakuraPetals count={16} intensity={1} />
                 <Header />
                 <main>{children}</main>
                 <Footer />
@@ -45,4 +46,3 @@ export default function RootLayout({
         </html>
     );
 }
-
