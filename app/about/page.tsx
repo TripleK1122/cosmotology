@@ -9,68 +9,73 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function AboutPage() {
-    return (
-        <section className="about">
-            <Container>
-                <div className="topGrid">
-                    {/* ✅ СНАЧАЛА фото (на мобилке будет сверху) */}
-                    <div className="rightCol">
-                        <PortraitCarousel />
-                    </div>
+  return (
+    <section className="about">
+      <Container>
+        <div className="topGrid">
+          {/* ✅ СНАЧАЛА фото (на мобилке будет сверху) */}
+          <div className="rightCol">
+            <PortraitCarousel />
+          </div>
 
-                    {/* ✅ ПОТОМ текст */}
-                    <div className="leftCol">
-                        <Reveal>
-                            <div className="kicker">About the Founder</div>
-                        </Reveal>
+          {/* ✅ ПОТОМ текст */}
+          <div className="leftCol">
+            <Reveal>
+              <div className="kicker">About the Founder</div>
+            </Reveal>
 
-                        <Reveal delay={0.05} y={18}>
-                            <h1 className="h-serif title">
-                                Skincare that feels private,
-                                <br />
-                                intentional, and quietly
-                                <br />
-                                exceptional.
-                            </h1>
-                        </Reveal>
+            <Reveal delay={0.05} y={18}>
+              <h1 className="h-serif title">
+                Skincare that feels private,
+                <br />
+                intentional, and quietly
+                <br />
+                exceptional.
+              </h1>
+            </Reveal>
 
-                        <Reveal delay={0.12} y={16}>
-                            <p className="lead">
-                                Janet Esthetics is a private studio built for clients who want results — without the rush, noise, or “assembly-line” appointments. Every detail is
-                                designed to slow the experience down and focus on what matters: skin health, comfort, and trust.
-                            </p>
-                        </Reveal>
+            <Reveal delay={0.12} y={16}>
+              <p className="lead">
+                Janet is a skincare professional whose work begins with respect for the individual. Her approach is
+                rooted in natural beauty, intentional care, and confidence that comes not from trends — but from truly
+                understanding the skin.
+              </p>
+            </Reveal>
 
-                        <Reveal delay={0.18} y={14}>
-                            <div className="facts">
-                                <Fact label="By appointment only" value="Private studio" />
-                                <Fact label="Focus" value="Skin health & longevity" />
-                                <Fact label="Approach" value="Clean, curated protocols" />
-                            </div>
-                        </Reveal>
+            <Reveal delay={0.18} y={14}>
+              <div className="facts">
+                <Fact label="Individual approach" value="Private practice" />
+                <Fact label="Focus" value="Skin health & balance" />
+                <Fact label="Philosophy" value="Clean, thoughtful protocols" />
+              </div>
+            </Reveal>
 
-                        <Reveal delay={0.22} y={12}>
-                            <div className="divider" />
-                        </Reveal>
+            <Reveal delay={0.22} y={12}>
+              <div className="divider" />
+            </Reveal>
 
-                        <Reveal delay={0.26} y={12}>
-                            <div className="body">
-                                <p>
-                                    This practice was created as a response to an industry that often prioritizes trends over technique. Here, treatments are never rushed. We start by
-                                    listening — and by building a plan that makes sense for your skin.
-                                </p>
-                                <p>Janet’s philosophy is simple: true beauty is a practice. It’s what happens when skin is healthy, cared for, and respected over time.</p>
-                            </div>
-                        </Reveal>
-                    </div>
-                </div>
-            </Container>
+            <Reveal delay={0.26} y={12}>
+              <div className="body">
+                <p>
+                  This practice was created in response to an industry that too often prioritizes appearance over
+                  substance. Here, treatments are never rushed. Each appointment begins with listening — and with
+                  building a plan that reflects the real needs of the skin and the person behind it.
+                </p>
+                <p>
+                  Janet’s philosophy is simple: beauty is a practice, not a moment. It emerges when skin is healthy,
+                  cared for, and treated with respect over time.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </Container>
 
-            <style>{`
+      <style>{`
         .about{
           padding: 92px 0 72px;
           position: relative;
-          overflow: hidden; /* ✅ чтобы ничего не наезжало странно */
+          overflow: hidden;
           background:
             radial-gradient(1200px 700px at 20% 5%, rgba(184,150,74,0.12), rgba(255,255,255,0) 60%),
             radial-gradient(1000px 600px at 90% 10%, rgba(46,42,37,0.10), rgba(255,255,255,0) 70%);
@@ -132,14 +137,12 @@ export default function AboutPage() {
         .body p{ margin: 0; }
         .body p + p{ margin-top: 18px; }
 
-        /* ✅ МОБИЛКА: 1 колонка, СНАЧАЛА карусель, ПОТОМ текст */
         @media (max-width: 980px){
           .topGrid{
             grid-template-columns: 1fr;
             gap: 22px;
           }
 
-          /* ✅ УБИРАЕМ overlap полностью */
           .rightCol{
             margin-top: 0 !important;
             z-index: 1;
@@ -153,143 +156,149 @@ export default function AboutPage() {
           .title{ font-size: 36px; }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 }
 
 function PortraitCarousel() {
-    const reduce = useReducedMotion();
+  const reduce = useReducedMotion();
 
-    const slides = useMemo(
-        () => [
-            { src: "/images/about/portrait-1.jpg", alt: "Founder portrait 1" },
-            { src: "/images/about/portrait-2.jpg", alt: "Founder portrait 2" },
-            { src: "/images/about/portrait-3.jpg", alt: "Founder portrait 3" },
-        ],
-        []
-    );
+  // ✅ добавили objectPosition per-slide (подгонишь если надо)
+  const slides = useMemo(
+    () => [
+      { src: "/images/about/portrait-1.jpg", alt: "Founder portrait 1", pos: "50% 18%" },
+      { src: "/images/about/portrait-2.jpg", alt: "Founder portrait 2", pos: "50% 22%" },
+      { src: "/images/about/portrait-3.jpg", alt: "Founder portrait 3", pos: "50% 14%" },
+    ],
+    []
+  );
 
-    const [index, setIndex] = useState(0);
-    const [dir, setDir] = useState<1 | -1>(1);
+  const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState<1 | -1>(1);
+  const [imgOk, setImgOk] = useState<Record<number, boolean>>({});
 
-    const [imgOk, setImgOk] = useState<Record<number, boolean>>({});
+  const go = useCallback(
+    (next: number) => {
+      const n = (next + slides.length) % slides.length;
+      setDir(n > index ? 1 : -1);
+      setIndex(n);
+    },
+    [index, slides.length]
+  );
 
-    const go = useCallback(
-        (next: number) => {
-            const n = (next + slides.length) % slides.length;
-            setDir(n > index ? 1 : -1);
-            setIndex(n);
-        },
-        [index, slides.length]
-    );
+  const next = useCallback(() => go(index + 1), [go, index]);
+  const prev = useCallback(() => go(index - 1), [go, index]);
 
-    const next = useCallback(() => go(index + 1), [go, index]);
-    const prev = useCallback(() => go(index - 1), [go, index]);
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    if (reduce) return;
+    if (paused) return;
 
-    const [paused, setPaused] = useState(false);
-    useEffect(() => {
-        if (reduce) return;
-        if (paused) return;
+    const t = window.setInterval(() => {
+      setDir(1);
+      setIndex((v) => (v + 1) % slides.length);
+    }, 5200);
 
-        const t = window.setInterval(() => {
-            setDir(1);
-            setIndex((v) => (v + 1) % slides.length);
-        }, 5200);
+    return () => window.clearInterval(t);
+  }, [paused, reduce, slides.length]);
 
-        return () => window.clearInterval(t);
-    }, [paused, reduce, slides.length]);
+  const showRealImage = !!imgOk[index];
 
-    const showRealImage = !!imgOk[index];
+  return (
+    <div className="carouselWrap">
+      <div className="sticky">
+        <div
+          className="card"
+          aria-label="Founder photos carousel"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div className="overlay" />
+          <div className="grain" />
 
-    return (
-        <div className="carouselWrap">
-            <div className="sticky">
-                <div
-                    className="card"
-                    aria-label="Founder photos carousel"
-                    onMouseEnter={() => setPaused(true)}
-                    onMouseLeave={() => setPaused(false)}
-                >
-                    <div className="overlay" />
-                    <div className="grain" />
-
-                    <AnimatePresence initial={false} custom={dir}>
-                        <motion.div
-                            key={slides[index].src}
-                            custom={dir}
-                            initial={reduce ? { opacity: 0 } : { opacity: 0, x: dir * 18, scale: 0.995 }}
-                            animate={reduce ? { opacity: 1 } : { opacity: 1, x: 0, scale: 1 }}
-                            exit={reduce ? { opacity: 0 } : { opacity: 0, x: -dir * 18, scale: 0.995 }}
-                            transition={{ duration: 0.55, ease }}
-                            className="img"
-                            drag={reduce ? false : "x"}
-                            dragConstraints={{ left: 0, right: 0 }}
-                            dragElastic={0.12}
-                            onDragEnd={(_, info) => {
-                                if (reduce) return;
-                                if (info.offset.x < -60) next();
-                                if (info.offset.x > 60) prev();
-                            }}
-                        >
-                            <div className="placeholder" aria-hidden="true">
-                                <div className="mono">JE</div>
-                                <div className="phText">Founder portraits • Coming soon</div>
-                            </div>
-
-                            <Image
-                                src={slides[index].src}
-                                alt={slides[index].alt}
-                                fill
-                                priority={index === 0}
-                                sizes="(max-width: 980px) 100vw, 40vw"
-                                style={{
-                                    objectFit: "cover",
-                                    opacity: showRealImage ? 1 : 0,
-                                    transition: "opacity 260ms ease",
-                                }}
-                                onLoadingComplete={() => {
-                                    setImgOk((m) => ({ ...m, [index]: true }));
-                                }}
-                                onError={() => {
-                                    setImgOk((m) => ({ ...m, [index]: false }));
-                                }}
-                            />
-                        </motion.div>
-                    </AnimatePresence>
-
-                    <button className="nav left" type="button" onClick={prev} aria-label="Previous photo">
-                        ‹
-                    </button>
-                    <button className="nav right" type="button" onClick={next} aria-label="Next photo">
-                        ›
-                    </button>
-
-                    <div className="dots" role="tablist" aria-label="Choose photo">
-                        {slides.map((_, i) => {
-                            const active = i === index;
-                            return (
-                                <button
-                                    key={i}
-                                    type="button"
-                                    className={`dot ${active ? "active" : ""}`}
-                                    onClick={() => go(i)}
-                                    aria-label={`Go to photo ${i + 1}`}
-                                    aria-pressed={active}
-                                />
-                            );
-                        })}
-                    </div>
-
-                    <div className="label">
-                        <span className="bullet" />
-                        Founder • Esthetic Specialist
-                    </div>
-
-                    <div className="border" />
+          <AnimatePresence initial={false} custom={dir}>
+            <motion.div
+              key={slides[index].src}
+              custom={dir}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, x: dir * 18, scale: 0.995 }}
+              animate={reduce ? { opacity: 1 } : { opacity: 1, x: 0, scale: 1 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, x: -dir * 18, scale: 0.995 }}
+              transition={{ duration: 0.55, ease }}
+              className="img"
+              drag={reduce ? false : "x"}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.12}
+              onDragEnd={(_, info) => {
+                if (reduce) return;
+                if (info.offset.x < -60) next();
+                if (info.offset.x > 60) prev();
+              }}
+            >
+              {/* ✅ placeholder показываем ТОЛЬКО пока фото не загрузилось (убирает “watermark”) */}
+              {!showRealImage && (
+                <div className="placeholder" aria-hidden="true">
+                  <div className="mono">JE</div>
+                  <div className="phText">Founder portraits • Coming soon</div>
                 </div>
-            </div>
+              )}
 
-            <style>{`
+              <Image
+                src={slides[index].src}
+                alt={slides[index].alt}
+                fill
+                priority={index === 0}
+                sizes="(max-width: 980px) 100vw, 40vw"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: slides[index].pos,
+                  opacity: showRealImage ? 1 : 0,
+                  transition: "opacity 260ms ease",
+                  // ✅ чуть “оживляем” фото (меньше тусклости)
+                  filter: "brightness(1.06) contrast(1.04) saturate(1.05)",
+                }}
+                onLoadingComplete={() => {
+                  setImgOk((m) => ({ ...m, [index]: true }));
+                }}
+                onError={() => {
+                  setImgOk((m) => ({ ...m, [index]: false }));
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <button className="nav left" type="button" onClick={prev} aria-label="Previous photo">
+            ‹
+          </button>
+          <button className="nav right" type="button" onClick={next} aria-label="Next photo">
+            ›
+          </button>
+
+          <div className="dots" role="tablist" aria-label="Choose photo">
+            {slides.map((_, i) => {
+              const active = i === index;
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  className={`dot ${active ? "active" : ""}`}
+                  onClick={() => go(i)}
+                  aria-label={`Go to photo ${i + 1}`}
+                  aria-pressed={active}
+                />
+              );
+            })}
+          </div>
+
+          <div className="label">
+            <span className="bullet" />
+            Founder • Esthetic Specialist
+          </div>
+
+          <div className="border" />
+        </div>
+      </div>
+
+      <style>{`
         .carouselWrap{ position: relative; }
         .sticky{ position: sticky; top: 110px; }
 
@@ -303,7 +312,8 @@ function PortraitCarousel() {
           box-shadow: 0 34px 110px rgba(0,0,0,0.12);
         }
 
-        .img{ position:absolute; inset:0; }
+        /* ✅ важно: слой с картинкой выше placeholder, но ниже overlay/nav */
+        .img{ position:absolute; inset:0; z-index: 1; }
 
         .placeholder{
           position:absolute;
@@ -318,7 +328,7 @@ function PortraitCarousel() {
           flex-direction: column;
           gap: 10px;
           color: rgba(46,42,37,0.70);
-          z-index: 1;
+          z-index: 0; /* ✅ больше не перекрывает фото */
         }
         .mono{
           font-family: ui-serif;
@@ -333,21 +343,23 @@ function PortraitCarousel() {
           opacity: 0.55;
         }
 
+        /* ✅ ослабили “дымку”, чтобы фото не было тусклым */
         .overlay{
           position:absolute;
           inset:0;
           background:
-            radial-gradient(60% 80% at 70% 30%, rgba(255,255,255,0.20), rgba(255,255,255,0) 60%),
-            linear-gradient(135deg, rgba(46,42,37,0.14), rgba(46,42,37,0.02));
+            radial-gradient(60% 80% at 70% 30%, rgba(255,255,255,0.10), rgba(255,255,255,0) 60%),
+            linear-gradient(135deg, rgba(46,42,37,0.08), rgba(46,42,37,0.01));
           pointer-events:none;
           z-index: 2;
         }
 
+        /* ✅ меньше шума = меньше мутности */
         .grain{
           position:absolute;
           inset:-40%;
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
-          opacity: 0.085;
+          opacity: 0.045; /* было 0.085 */
           mix-blend-mode: overlay;
           transform: rotate(8deg);
           pointer-events:none;
@@ -456,29 +468,29 @@ function PortraitCarousel() {
           .label{ display:none; }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
 
 function Fact({ label, value }: { label: string; value: string }) {
-    return (
-        <div
-            style={{
-                padding: "10px 12px",
-                borderRadius: 999,
-                background: "rgba(250,244,236,0.72)",
-                border: "1px solid rgba(46,42,37,0.10)",
-                fontSize: 12,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "rgba(46,42,37,0.70)",
-                display: "inline-flex",
-                gap: 10,
-                alignItems: "center",
-            }}
-        >
-            <span style={{ opacity: 0.6 }}>{label}</span>
-            <span style={{ opacity: 0.95 }}>{value}</span>
-        </div>
-    );
+  return (
+    <div
+      style={{
+        padding: "10px 12px",
+        borderRadius: 999,
+        background: "rgba(250,244,236,0.72)",
+        border: "1px solid rgba(46,42,37,0.10)",
+        fontSize: 12,
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+        color: "rgba(46,42,37,0.70)",
+        display: "inline-flex",
+        gap: 10,
+        alignItems: "center",
+      }}
+    >
+      <span style={{ opacity: 0.6 }}>{label}</span>
+      <span style={{ opacity: 0.95 }}>{value}</span>
+    </div>
+  );
 }
