@@ -1,7 +1,6 @@
 export const metadata = {
     title: "FAQ — Janet Esthetics",
-    description:
-        "Frequently asked questions about PRP hair therapy, PRP skin treatments, and microneedling.",
+    description: "Frequently asked questions about PRP hair therapy, PRP skin treatments, and microneedling.",
 };
 
 const sections = [
@@ -120,85 +119,180 @@ const sections = [
 
 export default function FAQPage() {
     return (
-        <main style={{ padding: "88px 0 72px" }}>
-            <div style={{ maxWidth: 980, margin: "0 auto", padding: "0 18px" }}>
-                <div
-                    style={{
-                        fontSize: 12,
-                        letterSpacing: ".28em",
-                        textTransform: "uppercase",
-                        color: "rgba(46,42,37,0.55)",
-                        marginBottom: 14,
-                    }}
-                >
-                    FAQ
-                </div>
+        <main className="faq">
+            <div className="wrap">
+                <div className="kicker">FAQ</div>
 
-                <h1
-                    style={{
-                        fontFamily: "ui-serif",
-                        fontSize: 52,
-                        lineHeight: 1.05,
-                        margin: "0 0 18px",
-                        color: "rgba(46,42,37,0.92)",
-                        letterSpacing: "-0.015em",
-                    }}
-                >
-                    Frequently Asked Questions
-                </h1>
+                <h1 className="h1">Frequently Asked Questions</h1>
 
-                <p style={{ maxWidth: 760, color: "rgba(46,42,37,0.70)", lineHeight: 1.9 }}>
+                <p className="lead">
                     Clear, honest answers about PRP and microneedling treatments. If you’re unsure what’s best for you, a
                     consultation is always the right place to start.
                 </p>
 
-                <div style={{ height: 1, margin: "26px 0", background: "rgba(46,42,37,0.10)" }} />
+                <div className="rule" />
 
                 {sections.map((section) => (
-                    <section key={section.title} style={{ marginBottom: 34 }}>
-                        <h2
-                            style={{
-                                fontSize: 16,
-                                letterSpacing: ".08em",
-                                textTransform: "uppercase",
-                                color: "rgba(46,42,37,0.80)",
-                                marginBottom: 12,
-                            }}
-                        >
-                            {section.title}
-                        </h2>
+                    <section key={section.title} className="section">
+                        <h2 className="h2">{section.title}</h2>
 
-                        <div style={{ display: "grid", gap: 10 }}>
+                        <div className="list">
                             {section.items.map((item) => (
-                                <details
-                                    key={item.q}
-                                    style={{
-                                        borderRadius: 16,
-                                        border: "1px solid rgba(46,42,37,0.10)",
-                                        background: "rgba(255,255,255,0.18)",
-                                        padding: "14px 16px",
-                                    }}
-                                >
-                                    <summary
-                                        style={{
-                                            cursor: "pointer",
-                                            fontWeight: 600,
-                                            color: "rgba(46,42,37,0.92)",
-                                            lineHeight: 1.5,
-                                            listStyle: "none",
-                                        }}
-                                    >
-                                        {item.q}
+                                <details key={item.q} className="item">
+                                    <summary className="q">
+                                        <span className="qText">{item.q}</span>
+                                        <span className="icon" aria-hidden="true">
+                                            +
+                                        </span>
                                     </summary>
-                                    <div style={{ marginTop: 10, color: "rgba(46,42,37,0.70)", lineHeight: 1.8 }}>
-                                        {item.a}
-                                    </div>
+                                    <div className="a">{item.a}</div>
                                 </details>
                             ))}
                         </div>
                     </section>
                 ))}
             </div>
+
+            <style>{`
+          .faq{
+            padding: 92px 0 76px;
+            position: relative;
+            overflow: hidden;
+            background:
+              radial-gradient(1200px 700px at 20% 5%, rgba(184,150,74,0.10), rgba(255,255,255,0) 60%),
+              radial-gradient(1000px 600px at 90% 10%, rgba(46,42,37,0.08), rgba(255,255,255,0) 70%);
+          }
+  
+          .wrap{
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 18px;
+          }
+  
+          .kicker{
+            font-size: 12px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: rgba(46,42,37,0.55);
+            margin-bottom: 14px;
+          }
+  
+          .h1{
+            font-family: ui-serif;
+            font-size: 52px;
+            line-height: 1.05;
+            margin: 0 0 16px;
+            color: rgba(46,42,37,0.92);
+            letter-spacing: -0.015em;
+          }
+  
+          .lead{
+            max-width: 760px;
+            color: rgba(46,42,37,0.70);
+            line-height: 1.9;
+            margin: 0;
+            font-size: 16.5px;
+          }
+  
+          .rule{
+            height: 1px;
+            margin: 26px 0 28px;
+            background: linear-gradient(to right, rgba(46,42,37,0), rgba(46,42,37,0.16), rgba(46,42,37,0));
+          }
+  
+          .section{
+            margin-bottom: 34px;
+          }
+  
+          .h2{
+            font-size: 13px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(46,42,37,0.78);
+            margin: 0 0 12px;
+          }
+  
+          .list{
+            display: grid;
+            gap: 10px;
+          }
+  
+          .item{
+            border-radius: 18px;
+            border: 1px solid rgba(46,42,37,0.10);
+            background: rgba(255,255,255,0.18);
+            box-shadow: 0 14px 46px rgba(0,0,0,0.04);
+            overflow: hidden;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+          }
+  
+          .item:hover{
+            border-color: rgba(46,42,37,0.14);
+            background: rgba(255,255,255,0.22);
+          }
+  
+          summary{
+            list-style: none;
+          }
+          summary::-webkit-details-marker{
+            display:none;
+          }
+  
+          .q{
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 14px 16px;
+          }
+  
+          .qText{
+            font-weight: 600;
+            color: rgba(46,42,37,0.90);
+            line-height: 1.45;
+            font-size: 15px;
+          }
+  
+          .icon{
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: rgba(250,244,236,0.72);
+            border: 1px solid rgba(46,42,37,0.10);
+            color: rgba(46,42,37,0.70);
+            font-size: 18px;
+            line-height: 0;
+            transition: transform 180ms ease, opacity 180ms ease;
+          }
+  
+          .item[open] .icon{
+            transform: rotate(45deg);
+            opacity: 0.92;
+          }
+  
+          .a{
+            padding: 0 16px 16px;
+            color: rgba(46,42,37,0.70);
+            line-height: 1.85;
+            font-size: 15px;
+          }
+  
+          @media (max-width: 720px){
+            .h1{ font-size: 40px; }
+            .lead{ font-size: 16px; }
+          }
+  
+          @media (max-width: 520px){
+            .faq{ padding: 78px 0 64px; }
+            .h1{ font-size: 34px; }
+            .q{ padding: 13px 14px; }
+            .a{ padding: 0 14px 14px; }
+            .icon{ width: 32px; height: 32px; }
+          }
+        `}</style>
         </main>
     );
 }

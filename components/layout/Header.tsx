@@ -7,7 +7,6 @@ import Container from "@/components/layout/Container";
 import BookButton from "@/components/ui/BookButton";
 import { useEffect, useState } from "react";
 
-
 const nav = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -15,10 +14,13 @@ const nav = [
   { href: "/booking", label: "Booking" },
   { href: "/contact", label: "Contact" },
   { href: "/services/faq", label: "FAQ" }, // ✅ добавили
-
 ];
 
+// ✅ фикс: чтобы на /services/faq НЕ подсвечивались Services + FAQ одновременно
 function isActive(pathname: string, href: string) {
+  // если мы на странице FAQ внутри /services, подсвечиваем ТОЛЬКО пункт FAQ
+  if (pathname === "/services/faq") return href === "/services/faq";
+
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(href + "/");
 }
@@ -73,11 +75,7 @@ export default function Header() {
               {nav.map((item) => {
                 const active = isActive(pathname, item.href);
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`jeNavLink ${active ? "isActive" : ""}`}
-                  >
+                  <Link key={item.href} href={item.href} className={`jeNavLink ${active ? "isActive" : ""}`}>
                     {item.label}
                   </Link>
                 );
@@ -203,7 +201,6 @@ export default function Header() {
           .jeNavLink{ padding: 9px 12px; font-size: 13px; }
         }
 
-        /* ✅ MOBILE FIX: brand+cta сверху, навигация отдельной строкой */
         @media (max-width: 640px){
           .jeRow{
             height: auto;
