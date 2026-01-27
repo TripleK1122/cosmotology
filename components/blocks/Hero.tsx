@@ -10,107 +10,107 @@ import { motion, useReducedMotion } from "framer-motion";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Hero() {
-    const reduce = useReducedMotion();
-    const cardRef = useRef<HTMLDivElement | null>(null);
+  const reduce = useReducedMotion();
+  const cardRef = useRef<HTMLDivElement | null>(null);
 
-    const onMove = useMemo(() => {
-        if (reduce) return undefined;
+  const onMove = useMemo(() => {
+    if (reduce) return undefined;
 
-        return (e: React.MouseEvent<HTMLDivElement>) => {
-            const el = cardRef.current;
-            if (!el) return;
+    return (e: React.MouseEvent<HTMLDivElement>) => {
+      const el = cardRef.current;
+      if (!el) return;
 
-            const r = el.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width; // 0..1
-            const y = (e.clientY - r.top) / r.height; // 0..1
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width; // 0..1
+      const y = (e.clientY - r.top) / r.height; // 0..1
 
-            const rx = (0.5 - y) * 2.6;
-            const ry = (x - 0.5) * 2.6;
+      const rx = (0.5 - y) * 2.6;
+      const ry = (x - 0.5) * 2.6;
 
-            el.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
-        };
-    }, [reduce]);
+      el.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+    };
+  }, [reduce]);
 
-    const onLeave = useMemo(() => {
-        return () => {
-            const el = cardRef.current;
-            if (!el) return;
-            el.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px)";
-        };
-    }, []);
+  const onLeave = useMemo(() => {
+    return () => {
+      const el = cardRef.current;
+      if (!el) return;
+      el.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+    };
+  }, []);
 
-    return (
-        <section className="hero">
-            <Container>
-                <div className="grid">
-                    <div className="left">
-                        <Reveal delay={0}>
-                            <div className="kicker">Private Esthetic Studio</div>
-                        </Reveal>
+  return (
+    <section className="hero">
+      <Container>
+        <div className="grid">
+          <div className="left">
+            <Reveal delay={0}>
+              <div className="kicker">Private Esthetic Studio</div>
+            </Reveal>
 
-                        <Reveal delay={0.05} y={22}>
-                            <h1 className="h-serif title">
-                                Where Beauty
-                                <br />
-                                Meets Serenity
-                            </h1>
-                        </Reveal>
+            <Reveal delay={0.05} y={22}>
+              <h1 className="h-serif title">
+                Where Beauty
+                <br />
+                Meets Serenity
+              </h1>
+            </Reveal>
 
-                        <Reveal delay={0.11} y={18}>
-                            <p className="sub">
-                                Experience transformative skincare in an intimate, private setting. Each treatment is carefully curated
-                                to honor your skin&apos;s unique journey.
-                            </p>
-                        </Reveal>
+            <Reveal delay={0.11} y={18}>
+              <p className="sub">
+                Experience transformative skincare in an intimate, private setting. Each treatment is carefully curated
+                to honor your skin&apos;s unique journey.
+              </p>
+            </Reveal>
 
-                        {/* signature accent line */}
-                        <Reveal delay={0.15} y={14}>
-                            <div className="signature">
-                                <span className="sigMark" />
-                                <span className="sigText">
-                                    Calm, precise,{" "}
-                                    <span className="sigItalic">intentionally</span>{" "}
-                                    personal.
-                                </span>
-                            </div>
-                        </Reveal>
+            {/* signature accent line */}
+            <Reveal delay={0.15} y={14}>
+              <div className="signature">
+                <span className="sigMark" />
+                <span className="sigText">
+                  Calm, precise,{" "}
+                  <span className="sigItalic">intentionally</span>{" "}
+                  personal.
+                </span>
+              </div>
+            </Reveal>
 
-                        <Reveal delay={0.19} y={12}>
-                            <div className="ctaRow">
-                                <BookButton label="Book Appointment" className="heroCta" />
-                                <a href="/services" className="ghostCta">
-                                    Explore Services <span className="arr">→</span>
-                                </a>
-                            </div>
-                        </Reveal>
-                    </div>
+            <Reveal delay={0.19} y={12}>
+              <div className="ctaRow">
+                <BookButton label="Book Appointment" className="heroCta" />
+                <a href="/services" className="ghostCta">
+                  Explore Services <span className="arr">→</span>
+                </a>
+              </div>
+            </Reveal>
+          </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 18, scale: 0.985 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 1.0, ease, delay: 0.12 }}
-                        className="right"
-                    >
-                        <div ref={cardRef} className="card" onMouseMove={onMove} onMouseLeave={onLeave}>
-                            <Image
-                                src="/images/hero.jpg"
-                                alt="Janet Esthetics — treatment room"
-                                fill
-                                priority
-                                sizes="(max-width: 900px) 100vw, 52vw"
-                                style={{ objectFit: "cover" }}
-                            />
+          <motion.div
+            initial={{ opacity: 0, y: 18, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.0, ease, delay: 0.12 }}
+            className="right"
+          >
+            <div ref={cardRef} className="card" onMouseMove={onMove} onMouseLeave={onLeave}>
+              <Image
+                src="/images/hero.jpg"
+                alt="Janet Esthetics — treatment room"
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 52vw"
+                style={{ objectFit: "cover" }}
+              />
 
-                            <div className="overlay" />
-                            <div className="grain" />
-                            <div className="pill">Treatment room • Private studio</div>
-                            <div className="border" />
-                        </div>
-                    </motion.div>
-                </div>
-            </Container>
+              <div className="overlay" />
+              <div className="grain" />
+              <div className="pill">Treatment room • Private studio</div>
+              <div className="border" />
+            </div>
+          </motion.div>
+        </div>
+      </Container>
 
-            <style>{`
+      <style>{`
         .hero{
           padding: 70px 0 28px;
           position: relative;
@@ -300,6 +300,6 @@ export default function Hero() {
           .pill{ display:none; }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 }

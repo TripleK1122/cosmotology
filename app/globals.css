@@ -6,7 +6,10 @@
 
 html,
 body {
-    height: 100%;
+    height: auto;
+    /* вместо 100% */
+    min-height: 100%;
+
 }
 
 body {
@@ -892,4 +895,8 @@ p {
     .je-reviews__grid {
         grid-template-columns: 1fr;
     }
+}
+
+footer {
+    margin-top: 0 !important;
 }
