@@ -7,89 +7,92 @@ import Container from "@/components/layout/Container";
 import BookButton from "@/components/ui/BookButton";
 import { useEffect, useState } from "react";
 
+
 const nav = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
-    { href: "/booking", label: "Booking" },
-    { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/booking", label: "Booking" },
+  { href: "/contact", label: "Contact" },
+  { href: "/services/faq", label: "FAQ" }, // ✅ добавили
+
 ];
 
 function isActive(pathname: string, href: string) {
-    if (href === "/") return pathname === "/";
-    return pathname === href || pathname.startsWith(href + "/");
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href + "/");
 }
 
 export default function Header() {
-    const pathname = usePathname();
-    const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
 
-    useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 6);
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 6);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    return (
-        <header
-            className="jeHeader"
-            style={{
-                position: "sticky",
-                top: 0,
-                zIndex: 50,
-                background: scrolled ? "rgba(243, 237, 228, 0.86)" : "rgba(243, 237, 228, 0.68)",
-                backdropFilter: "blur(14px)",
-                borderBottom: scrolled ? "1px solid rgba(46,42,37,0.14)" : "1px solid rgba(46,42,37,0.08)",
-                boxShadow: scrolled ? "0 14px 40px rgba(46,42,37,0.10)" : "none",
-                transition: "all 220ms ease",
-            }}
-        >
-            <Container>
-                <div className="jeRow">
-                    {/* BRAND */}
-                    <div className="jeLeft">
-                        <Link href="/" className="jeBrand" aria-label="Janet Esthetics Home">
-                            <span className="jeLogoWrap" aria-hidden="true">
-                                <Image
-                                    src="/images/logo.jpg"
-                                    alt=""
-                                    width={44}
-                                    height={44}
-                                    priority
-                                    className="jeLogoImg"
-                                />
-                            </span>
-                            <span className="jeBrandText">Janet Esthetics</span>
-                        </Link>
-                    </div>
+  return (
+    <header
+      className="jeHeader"
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        background: scrolled ? "rgba(243, 237, 228, 0.86)" : "rgba(243, 237, 228, 0.68)",
+        backdropFilter: "blur(14px)",
+        borderBottom: scrolled ? "1px solid rgba(46,42,37,0.14)" : "1px solid rgba(46,42,37,0.08)",
+        boxShadow: scrolled ? "0 14px 40px rgba(46,42,37,0.10)" : "none",
+        transition: "all 220ms ease",
+      }}
+    >
+      <Container>
+        <div className="jeRow">
+          {/* BRAND */}
+          <div className="jeLeft">
+            <Link href="/" className="jeBrand" aria-label="Janet Esthetics Home">
+              <span className="jeLogoWrap" aria-hidden="true">
+                <Image
+                  src="/images/logo.jpg"
+                  alt=""
+                  width={44}
+                  height={44}
+                  priority
+                  className="jeLogoImg"
+                />
+              </span>
+              <span className="jeBrandText">Janet Esthetics</span>
+            </Link>
+          </div>
 
-                    {/* NAV */}
-                    <div className="jeCenter" aria-label="Primary navigation">
-                        <nav className="jeNav">
-                            {nav.map((item) => {
-                                const active = isActive(pathname, item.href);
-                                return (
-                                    <Link
-                                        key={item.href}
-                                        href={item.href}
-                                        className={`jeNavLink ${active ? "isActive" : ""}`}
-                                    >
-                                        {item.label}
-                                    </Link>
-                                );
-                            })}
-                        </nav>
-                    </div>
+          {/* NAV */}
+          <div className="jeCenter" aria-label="Primary navigation">
+            <nav className="jeNav">
+              {nav.map((item) => {
+                const active = isActive(pathname, item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`jeNavLink ${active ? "isActive" : ""}`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
 
-                    {/* CTA */}
-                    <div className="jeRight">
-                        <BookButton label="Book Now" className="jeCta" />
-                    </div>
-                </div>
-            </Container>
+          {/* CTA */}
+          <div className="jeRight">
+            <BookButton label="Book Now" className="jeCta" />
+          </div>
+        </div>
+      </Container>
 
-            <style>{`
+      <style>{`
         .jeHeader nav { display: flex !important; }
 
         .jeRow{
@@ -226,6 +229,6 @@ export default function Header() {
           }
         }
       `}</style>
-        </header>
-    );
+    </header>
+  );
 }

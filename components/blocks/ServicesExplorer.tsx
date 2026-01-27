@@ -13,219 +13,291 @@ import { motion, AnimatePresence } from "framer-motion";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function ServicesExplorer() {
-    const [activeCategory, setActiveCategory] = useState<CategoryId | null>(null);
-    const [activeService, setActiveService] = useState<Service | null>(null);
+  const [activeCategory, setActiveCategory] = useState<CategoryId | null>(null);
+  const [activeService, setActiveService] = useState<Service | null>(null);
 
-    const servicesRef = useRef<HTMLDivElement | null>(null);
+  const [productsOpen, setProductsOpen] = useState(false);
 
-    const items = useMemo(() => {
-        if (!activeCategory) return [];
-        return getServicesByCategory(activeCategory);
-    }, [activeCategory]);
+  const servicesRef = useRef<HTMLDivElement | null>(null);
 
-    const activeCat = useMemo(() => {
-        if (!activeCategory) return null;
-        return categories.find((c) => c.id === activeCategory) ?? null;
-    }, [activeCategory]);
+  const items = useMemo(() => {
+    if (!activeCategory) return [];
+    return getServicesByCategory(activeCategory);
+  }, [activeCategory]);
 
-    function onPickCategory(id: CategoryId) {
-        setActiveCategory(id);
+  const activeCat = useMemo(() => {
+    if (!activeCategory) return null;
+    return categories.find((c) => c.id === activeCategory) ?? null;
+  }, [activeCategory]);
 
-        requestAnimationFrame(() => {
-            servicesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-    }
+  function onPickCategory(id: CategoryId) {
+    setActiveCategory(id);
 
-    function onBackToCategories() {
-        setActiveCategory(null);
-        setActiveService(null);
+    requestAnimationFrame(() => {
+      servicesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
-        requestAnimationFrame(() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    }
+  function onBackToCategories() {
+    setActiveCategory(null);
+    setActiveService(null);
 
-    return (
-        <section className="wrap">
-            {/* PREMIUM CATEGORY GRID (stagger) */}
-            <motion.div
-                className="catGrid"
-                aria-label="Service categories"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
-                variants={{
-                    hidden: { opacity: 0 },
-                    show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.06 } },
-                }}
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  return (
+    <section className="wrap">
+      {!activeCategory ? (
+        <div className="topActions">
+          <button type="button" className="productsMiniBtn" onClick={() => setProductsOpen(true)}>
+            Products
+          </button>
+        </div>
+      ) : null}
+
+      <motion.div
+        className="catGrid"
+        aria-label="Service categories"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        variants={{
+          hidden: { opacity: 0 },
+          show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.06 } },
+        }}
+      >
+        {categories.map((c) => {
+          const isActive = c.id === activeCategory;
+
+          const bg = c.image
+            ? `url(${c.image})`
+            : "radial-gradient(1200px 600px at 20% 20%, rgba(184,150,74,0.25), rgba(46,42,37,0.06) 55%, rgba(255,255,255,0) 100%)";
+
+          return (
+            <motion.button
+              key={c.id}
+              type="button"
+              className={`catCard ${isActive ? "active" : ""}`}
+              onClick={() => onPickCategory(c.id)}
+              aria-pressed={isActive}
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+              }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.99 }}
+              transition={{ duration: 0.18 }}
+              onMouseMove={(e) => {
+                const el = e.currentTarget;
+                const r = el.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+
+                const dx = (x / r.width) * 2 - 1;
+                const dy = (y / r.height) * 2 - 1;
+
+                el.style.setProperty("--mx", `${x}px`);
+                el.style.setProperty("--my", `${y}px`);
+                el.style.setProperty("--px", `${dx.toFixed(3)}`);
+                el.style.setProperty("--py", `${dy.toFixed(3)}`);
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget;
+                el.style.setProperty("--px", `0`);
+                el.style.setProperty("--py", `0`);
+              }}
             >
-                {categories.map((c) => {
-                    const isActive = c.id === activeCategory;
+              <div className="img" style={{ backgroundImage: bg }} />
+              <div className="overlay" />
+              <div className="shine" />
+              <div className="catText">
+                <div className="catTitle">{c.title}</div>
+                <div className="catDesc">{c.description}</div>
+              </div>
+            </motion.button>
+          );
+        })}
+      </motion.div>
 
-                    const bg = c.image
-                        ? `url(${c.image})`
-                        : "radial-gradient(1200px 600px at 20% 20%, rgba(184,150,74,0.25), rgba(46,42,37,0.06) 55%, rgba(255,255,255,0) 100%)";
+      <AnimatePresence mode="wait">
+        {activeCategory ? (
+          <motion.div
+            key={activeCategory}
+            ref={servicesRef}
+            className="servicesBlock"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.55, ease }}
+          >
+            <div className="servicesHeader">
+              <div>
+                <div className="servicesTitle">{activeCat?.title ?? "Services"}</div>
+                <div className="servicesHint">Select a service to view details & pricing.</div>
+              </div>
 
-                    return (
-                        <motion.button
-                            key={c.id}
-                            type="button"
-                            className={`catCard ${isActive ? "active" : ""}`}
-                            onClick={() => onPickCategory(c.id)}
-                            aria-pressed={isActive}
-                            variants={{
-                                hidden: { opacity: 0, y: 14 },
-                                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
-                            }}
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.99 }}
-                            transition={{ duration: 0.18 }}
-                            onMouseMove={(e) => {
-                                const el = e.currentTarget;
-                                const r = el.getBoundingClientRect();
-                                const x = e.clientX - r.left;
-                                const y = e.clientY - r.top;
+              <div className="servicesActions">
+                <button type="button" className="productsMiniBtn" onClick={() => setProductsOpen(true)}>
+                  Products
+                </button>
 
-                                // -1..1
-                                const dx = (x / r.width) * 2 - 1;
-                                const dy = (y / r.height) * 2 - 1;
+                <button type="button" className="backBtn" onClick={onBackToCategories}>
+                  ← Back to categories
+                </button>
+              </div>
+            </div>
 
-                                el.style.setProperty("--mx", `${x}px`);
-                                el.style.setProperty("--my", `${y}px`);
-                                el.style.setProperty("--px", `${dx.toFixed(3)}`);
-                                el.style.setProperty("--py", `${dy.toFixed(3)}`);
-                            }}
-                            onMouseLeave={(e) => {
-                                const el = e.currentTarget;
-                                el.style.setProperty("--px", `0`);
-                                el.style.setProperty("--py", `0`);
-                            }}
-                        >
-                            <div className="img" style={{ backgroundImage: bg }} />
-                            <div className="overlay" />
-                            <div className="shine" />
-                            <div className="catText">
-                                <div className="catTitle">{c.title}</div>
-                                <div className="catDesc">{c.description}</div>
-                            </div>
-                        </motion.button>
-                    );
-                })}
-            </motion.div>
+            <motion.div
+              className="serviceGrid"
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+              }}
+            >
+              {items.map((s) => (
+                <motion.button
+                  key={s.slug}
+                  type="button"
+                  className="serviceCard"
+                  onClick={() => setActiveService(s)}
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+                  }}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.995 }}
+                  transition={{ duration: 0.18 }}
+                >
+                  {s.image ? <div className="serviceImg" style={{ backgroundImage: `url(${s.image})` }} /> : null}
 
-            {/* SERVICES LIST (animated presence) */}
-            <AnimatePresence mode="wait">
-                {activeCategory ? (
-                    <motion.div
-                        key={activeCategory}
-                        ref={servicesRef}
-                        className="servicesBlock"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.55, ease }}
-                    >
-                        <div className="servicesHeader">
-                            <div>
-                                <div className="servicesTitle">{activeCat?.title ?? "Services"}</div>
-                                <div className="servicesHint">Select a service to view details & pricing.</div>
-                            </div>
+                  <div className="serviceBody">
+                    <div className="serviceTop">
+                      <div className="serviceName">{s.title}</div>
 
-                            <button type="button" className="backBtn" onClick={onBackToCategories}>
-                                ← Back to categories
-                            </button>
-                        </div>
-
-                        {/* SERVICE GRID (stagger) */}
-                        <motion.div
-                            className="serviceGrid"
-                            initial="hidden"
-                            animate="show"
-                            variants={{
-                                hidden: { opacity: 0 },
-                                show: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
-                            }}
-                        >
-                            {items.map((s) => (
-                                <motion.button
-                                    key={s.slug}
-                                    type="button"
-                                    className="serviceCard"
-                                    onClick={() => setActiveService(s)}
-                                    variants={{
-                                        hidden: { opacity: 0, y: 12 },
-                                        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
-                                    }}
-                                    whileHover={{ y: -2 }}
-                                    whileTap={{ scale: 0.995 }}
-                                    transition={{ duration: 0.18 }}
-                                >
-                                    {s.image ? <div className="serviceImg" style={{ backgroundImage: `url(${s.image})` }} /> : null}
-
-                                    <div className="serviceBody">
-                                        <div className="serviceTop">
-                                            <div className="serviceName">{s.title}</div>
-
-                                            <div className="serviceMeta">
-                                                {s.duration ? <span>{s.duration}</span> : null}
-                                                {s.duration && s.price ? <span className="dot">•</span> : null}
-                                                {s.price ? <span>{s.price}</span> : null}
-                                            </div>
-                                        </div>
-
-                                        <div className="serviceSub">{s.subtitle}</div>
-
-                                        <div className="serviceMore">
-                                            View details <span className="arrow">→</span>
-                                        </div>
-
-                                        <div className="glow" />
-                                    </div>
-                                </motion.button>
-                            ))}
-                        </motion.div>
-                    </motion.div>
-                ) : null}
-            </AnimatePresence>
-
-            {/* MODAL */}
-            <Modal open={!!activeService} onClose={() => setActiveService(null)} title="">
-                {activeService && (
-                    <div className="modal">
-                        {activeService.image ? <div className="modalHero" style={{ backgroundImage: `url(${activeService.image})` }} /> : null}
-
-                        <div className="modalBody">
-                            <div className="modalRow">
-                                <h2 className="modalTitle">{activeService.title}</h2>
-                                {activeService.price ? <div className="modalPrice">{activeService.price}</div> : null}
-                            </div>
-
-                            {activeService.duration ? <div className="modalDuration">{activeService.duration}</div> : null}
-
-                            <div className="modalSectionTitle">About This Treatment</div>
-                            <p className="modalText">{activeService.subtitle}</p>
-
-                            <div className="modalSectionTitle">Benefits</div>
-                            <ul className="list">
-                                {activeService.benefits.map((b) => (
-                                    <li key={b}>{b}</li>
-                                ))}
-                            </ul>
-
-                            <div className="modalSectionTitle">Suitable For</div>
-                            <div className="modalText">{activeService.whoFor.join(", ")}</div>
-
-                            <div className="ctaWrap">
-                                <BookButton label="Book This Treatment" className="cta" />
-                            </div>
-                        </div>
+                      <div className="serviceMeta">
+                        {s.duration ? <span>{s.duration}</span> : null}
+                        {s.duration && s.price ? <span className="dot">•</span> : null}
+                        {s.price ? <span>{s.price}</span> : null}
+                      </div>
                     </div>
-                )}
-            </Modal>
 
-            <style>{`
+                    <div className="serviceSub">{s.subtitle}</div>
+
+                    <div className="serviceMore">
+                      View details <span className="arrow">→</span>
+                    </div>
+
+                    <div className="glow" />
+                  </div>
+                </motion.button>
+              ))}
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      {/* MODAL: SERVICE */}
+      <Modal open={!!activeService} onClose={() => setActiveService(null)} title="">
+        {activeService && (
+          <div className="modal">
+            {activeService.image ? <div className="modalHero" style={{ backgroundImage: `url(${activeService.image})` }} /> : null}
+
+            <div className="modalBody">
+              <div className="modalRow">
+                <h2 className="modalTitle">{activeService.title}</h2>
+                {activeService.price ? <div className="modalPrice">{activeService.price}</div> : null}
+              </div>
+
+              {activeService.duration ? <div className="modalDuration">{activeService.duration}</div> : null}
+
+              <div className="modalSectionTitle">About This Treatment</div>
+              <p className="modalText">{activeService.subtitle}</p>
+
+              <div className="modalSectionTitle">Benefits</div>
+              <ul className="list">
+                {activeService.benefits.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+
+              <div className="modalSectionTitle">Suitable For</div>
+              <div className="modalText">{activeService.whoFor.join(", ")}</div>
+
+              <div className="ctaWrap">
+                <BookButton label="Book This Treatment" className="cta" />
+              </div>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      {/* PRODUCTS MODAL */}
+      <Modal open={productsOpen} onClose={() => setProductsOpen(false)} title="">
+        <div className="modal">
+          <div className="modalBody">
+            <div className="modalRow">
+              <h2 className="modalTitle">Products We Use</h2>
+            </div>
+
+            <p className="modalText">
+              We work with trusted, professional-grade skincare brands. Product selection is confirmed during your consultation to match your
+              skin type and goals.
+            </p>
+
+            <div className="productsGrid">
+              <div className="productCard">
+                <div
+                  className="productImg"
+                  style={{
+                    backgroundImage: "url(/images/products/biojouvance.jpg)",
+                    backgroundPosition: "50% 70%",
+                  }}
+                  aria-label="Bio Jouvance Paris"
+                />
+                <div className="productName">Bio Jouvance Paris</div>
+                <div className="productDesc">
+                  French-inspired professional skincare with advanced formulas that support hydration, texture, and a healthy-looking glow—ideal
+                  for treatment protocols and post-care routines.
+                </div>
+                <a className="productLink" href="https://biojouvance.com/" target="_blank" rel="noreferrer">
+                  biojouvance.com →
+                </a>
+              </div>
+
+              <div className="productCard">
+                <div
+                  className="productImg"
+                  style={{
+                    backgroundImage: "url(/images/products/bellecote.jpg)",
+                    backgroundPosition: "50% 70%",
+                  }}
+                  aria-label="BelleCôte Paris"
+                />
+                <div className="productName">BelleCôte Paris</div>
+                <div className="productDesc">
+                  Premium Paris-based skincare with a clean, minimal approach—designed to support calm, balanced skin and enhance results from
+                  professional facial treatments.
+                </div>
+                <a className="productLink" href="https://bellecoteparis.com/" target="_blank" rel="noreferrer">
+                  bellecoteparis.com →
+                </a>
+              </div>
+            </div>
+
+            <div className="ctaWrap">
+              <BookButton label="Book Now" className="cta" />
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+      <style>{`
         /* RESET */
-        .catCard, .serviceCard, .backBtn{
+        .catCard, .serviceCard, .backBtn, .productsMiniBtn{
           appearance: none;
           -webkit-appearance: none;
           background: none;
@@ -235,19 +307,39 @@ export default function ServicesExplorer() {
           font: inherit;
           color: inherit;
         }
-        .catCard:focus, .serviceCard:focus, .backBtn:focus { outline: none; }
-        .catCard:focus-visible, .serviceCard:focus-visible, .backBtn:focus-visible{
+        .catCard:focus, .serviceCard:focus, .backBtn:focus, .productsMiniBtn:focus { outline: none; }
+        .catCard:focus-visible, .serviceCard:focus-visible, .backBtn:focus-visible, .productsMiniBtn:focus-visible{
           outline: 2px solid rgba(184,150,74,0.38);
           outline-offset: 4px;
           border-radius: 26px;
         }
 
         /* SECTION */
-        .wrap{ padding: 8px 0 40px; } /* меньше воздуха сверху */
+        .wrap{ padding: 15px 0 40px; }
 
-        /* CATEGORIES */
+        .topActions{
+          margin-top: -60px;
+          display:flex;
+          justify-content:flex-end;
+        }
+
+        .productsMiniBtn{
+          white-space: nowrap;
+          padding: 9px 12px;
+          border-radius: 999px;
+          background: rgba(184,150,74,0.10);
+          border: 1px solid rgba(184,150,74,0.22);
+          color: rgba(46,42,37,0.78);
+          transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+        }
+        .productsMiniBtn:hover{
+          transform: translateY(-1px);
+          background: rgba(184,150,74,0.14);
+          border-color: rgba(184,150,74,0.30);
+        }
+
         .catGrid{
-          margin-top: 10px;
+          margin-top: 8px;
           display:grid;
           grid-template-columns: repeat(2, minmax(0,1fr));
           gap: 22px;
@@ -268,13 +360,8 @@ export default function ServicesExplorer() {
           --my: 50%;
         }
 
-        .catCard:hover{
-          box-shadow: 0 34px 100px rgba(0,0,0,0.14);
-        }
-
-        .catCard.active{
-          outline: 2px solid rgba(184,150,74,0.35);
-        }
+        .catCard:hover{ box-shadow: 0 34px 100px rgba(0,0,0,0.14); }
+        .catCard.active{ outline: 2px solid rgba(184,150,74,0.35); }
 
         .img{
           position:absolute; inset:0;
@@ -284,7 +371,6 @@ export default function ServicesExplorer() {
           transform: scale(1.02) translate(calc(var(--px) * -10px), calc(var(--py) * -10px));
           transition: transform 360ms cubic-bezier(.16,1,.3,1), filter 360ms cubic-bezier(.16,1,.3,1);
         }
-
         .catCard:hover .img{
           transform: scale(1.07) translate(calc(var(--px) * -14px), calc(var(--py) * -14px));
           filter: saturate(1.02) contrast(1.04);
@@ -305,10 +391,7 @@ export default function ServicesExplorer() {
           transition: opacity 260ms cubic-bezier(.16,1,.3,1);
           pointer-events:none;
         }
-
-        .catCard:hover .shine{
-          opacity: 1;
-        }
+        .catCard:hover .shine{ opacity: 1; }
 
         .catText{
           position:absolute; left: 28px; right: 28px; bottom: 22px;
@@ -324,7 +407,6 @@ export default function ServicesExplorer() {
           font-family: ui-serif;
           font-size: 34px;
           color: rgba(46,42,37,0.92);
-          text-shadow: 0 1px 0 rgba(255,255,255,0.35);
         }
 
         .catDesc{
@@ -348,6 +430,12 @@ export default function ServicesExplorer() {
         .servicesTitle{ font-family: ui-serif; font-size: 40px; color: rgba(46,42,37,0.92); }
         .servicesHint{ color: rgba(46,42,37,0.55); margin-top: 6px; }
 
+        .servicesActions{
+          display:flex;
+          align-items:center;
+          gap: 10px;
+        }
+
         .backBtn{
           white-space: nowrap;
           padding: 10px 14px;
@@ -369,6 +457,7 @@ export default function ServicesExplorer() {
           grid-template-columns: repeat(2, minmax(0,1fr));
           gap: 18px;
         }
+
         .serviceCard{
           overflow:hidden;
           border-radius: 22px;
@@ -383,11 +472,13 @@ export default function ServicesExplorer() {
           box-shadow: 0 26px 70px rgba(0,0,0,0.10);
           border-color: rgba(184,150,74,0.20);
         }
+
         .serviceImg{
           height: 220px;
           background-size: cover;
           background-position: center;
         }
+
         .serviceBody{ padding: 18px 18px 16px; position: relative; }
         .serviceName{ font-family: ui-serif; font-size: 28px; color: rgba(46,42,37,0.92); }
         .serviceMeta{ margin-top: 10px; color: rgba(184,150,74,0.90); font-size: 16px; display:flex; gap: 10px; align-items:center; }
@@ -402,11 +493,7 @@ export default function ServicesExplorer() {
           align-items:center;
           gap: 10px;
         }
-        .arrow{
-          display:inline-block;
-          transform: translateX(0);
-          transition: transform 220ms ease;
-        }
+        .arrow{ display:inline-block; transform: translateX(0); transition: transform 220ms ease; }
         .serviceCard:hover .arrow{ transform: translateX(3px); }
 
         .glow{
@@ -420,7 +507,7 @@ export default function ServicesExplorer() {
         }
         .serviceCard:hover .glow{ opacity: 1; }
 
-        /* MODAL */
+        /* MODAL CONTENT */
         .modal{ border-radius: 22px; overflow:hidden; background: rgba(250,244,236,0.92); }
         .modalHero{ height: 320px; background-size: cover; background-position: center; }
         .modalBody{ padding: 22px; }
@@ -448,9 +535,72 @@ export default function ServicesExplorer() {
         }
         .cta:hover{ transform: translateY(-1px); opacity: .96; }
 
-        /* MOBILE */
+        /* PRODUCTS */
+        .productsGrid{
+          margin-top: 18px;
+          display:grid;
+          grid-template-columns: repeat(2, minmax(0,1fr));
+          gap: 14px;
+        }
+
+        .productCard{
+          border-radius: 18px;
+          overflow:hidden;
+          background: rgba(255,255,255,0.55);
+          border: 1px solid rgba(46,42,37,0.10);
+          box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+        }
+
+        .productImg{
+          width: 100%;
+          height: 180px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: 50% 28%;
+          background-color: transparent;
+          border-bottom: 0 !important;
+          border-top-left-radius: 18px;
+          border-top-right-radius: 18px;
+        }
+
+        .productName{
+          padding: 14px 16px 0;
+          font-family: ui-serif;
+          font-size: 22px;
+          color: rgba(46,42,37,0.92);
+        }
+
+        .productDesc{
+          padding: 8px 16px 0;
+          color: rgba(46,42,37,0.60);
+          line-height: 1.7;
+          font-size: 16px;
+        }
+
+        .productLink{
+          display:inline-block;
+          margin: 12px 16px 16px;
+          color: rgba(46,42,37,0.86);
+          font-weight: 600;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(184,150,74,0.35);
+        }
+        .productLink:hover{ border-bottom-color: rgba(184,150,74,0.70); }
+
+        /* ✅ MOBILE FIX (читабельно, кнопка не наезжает) */
         @media (max-width: 900px){
-          .wrap{ padding: 6px 0 26px; }
+          .wrap{ padding: 10px 0 26px; }
+
+          .topActions{
+            margin-top: 12px;          /* ✅ вместо -60px */
+            justify-content: flex-start;
+            padding: 0 2px;
+          }
+
+          .productsMiniBtn{
+            font-size: 14px;
+            padding: 8px 12px;
+          }
 
           .catGrid{
             margin-top: 14px;
@@ -462,18 +612,14 @@ export default function ServicesExplorer() {
             -webkit-overflow-scrolling: touch;
           }
           .catGrid::-webkit-scrollbar{ display:none; }
+
           .catCard{
             flex: 0 0 86%;
             min-height: 230px;
             border-radius: 22px;
             scroll-snap-align: start;
           }
-          .img{
-            transform: scale(1.02);
-          }
-          .catCard:hover .img{
-            transform: scale(1.06);
-          }
+
           .catText{
             left: 14px; right: 14px; bottom: 12px;
             padding: 14px;
@@ -487,11 +633,13 @@ export default function ServicesExplorer() {
             padding: 16px;
             border-radius: 22px;
           }
+
           .servicesHeader{
             flex-direction: column;
             align-items: flex-start;
-            gap: 6px;
+            gap: 10px;
           }
+          .servicesActions{ width: 100%; justify-content: flex-start; flex-wrap: wrap; }
           .servicesTitle{ font-size: 22px; }
           .servicesHint{ font-size: 13px; }
 
@@ -524,6 +672,9 @@ export default function ServicesExplorer() {
           .modalTitle{ font-size: 28px; line-height: 1.1; }
           .modalPrice{ font-size: 22px; }
           .modalText, .list{ font-size: 16px; }
+
+          .productsGrid{ grid-template-columns: 1fr; }
+          .productImg{ height: 160px; }
         }
 
         @media (max-width: 520px){
@@ -531,6 +682,6 @@ export default function ServicesExplorer() {
           .serviceImg{ height: 190px; }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 }

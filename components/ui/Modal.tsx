@@ -15,9 +15,11 @@ export default function Modal({
 }) {
     useEffect(() => {
         if (!open) return;
+
         const onKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") onClose();
         };
+
         document.addEventListener("keydown", onKeyDown);
         return () => document.removeEventListener("keydown", onKeyDown);
     }, [open, onClose]);
@@ -35,6 +37,10 @@ export default function Modal({
                 display: "grid",
                 placeItems: "center",
                 padding: 18,
+
+                // ✅ если модалка выше экрана — пусть контейнер тоже умеет скроллиться
+                overflowY: "auto",
+                WebkitOverflowScrolling: "touch",
             }}
         >
             <div
@@ -45,37 +51,51 @@ export default function Modal({
                     border: "1px solid rgba(46,42,37,0.12)",
                     background: "rgba(247, 241, 232, 0.98)",
                     boxShadow: "0 26px 80px rgba(0,0,0,0.25)",
+
+                    // ✅ главное: НЕ hidden, иначе скролла не будет
                     overflow: "hidden",
+
+                    // ✅ ограничиваем высоту модалки под экран и включаем скролл внутри
+                    maxHeight: "calc(100dvh - 36px)",
+                    display: "flex",
+                    flexDirection: "column",
+                    position: "relative",
                 }}
             >
+                {/* (опционально) если хочешь показывать title — можно вернуть header.
+            Сейчас оставляю без плашки, как ты просил. */}
+
+                <button
+                    onClick={onClose}
+                    style={{
+                        position: "absolute",
+                        top: 14,
+                        right: 14,
+                        border: "1px solid rgba(46,42,37,0.18)",
+                        background: "rgba(255,255,255,0.35)",
+                        borderRadius: 999,
+                        width: 40,
+                        height: 40,
+                        display: "grid",
+                        placeItems: "center",
+                        cursor: "pointer",
+                        zIndex: 2,
+                    }}
+                    aria-label="Close modal"
+                >
+                    ✕
+                </button>
+
+                {/* ✅ тут будет скролл */}
                 <div
                     style={{
-                        padding: "18px 20px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        borderBottom: "1px solid rgba(46,42,37,0.10)",
+                        padding: 22,
+                        overflowY: "auto",
+                        WebkitOverflowScrolling: "touch",
                     }}
                 >
-                    <div style={{ fontFamily: "ui-serif", fontSize: 20, color: "rgba(46,42,37,0.88)" }}>
-                        {title}
-                    </div>
-                    <button
-                        onClick={onClose}
-                        style={{
-                            border: "1px solid rgba(46,42,37,0.18)",
-                            background: "rgba(255,255,255,0.35)",
-                            borderRadius: 999,
-                            padding: "10px 14px",
-                            cursor: "pointer",
-                        }}
-                        aria-label="Close modal"
-                    >
-                        ✕
-                    </button>
+                    {children}
                 </div>
-
-                <div style={{ padding: 22 }}>{children}</div>
             </div>
         </div>
     );

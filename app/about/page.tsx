@@ -13,12 +13,15 @@ export default function AboutPage() {
     <section className="about">
       <Container>
         <div className="topGrid">
-          {/* ✅ СНАЧАЛА фото (на мобилке будет сверху) */}
           <div className="rightCol">
             <PortraitCarousel />
+
+            {/* ✅ Values: ровно, дорого, минимально */}
+            <Reveal delay={0.12} y={14}>
+              <CoreValues />
+            </Reveal>
           </div>
 
-          {/* ✅ ПОТОМ текст */}
           <div className="leftCol">
             <Reveal>
               <div className="kicker">About the Founder</div>
@@ -36,9 +39,9 @@ export default function AboutPage() {
 
             <Reveal delay={0.12} y={16}>
               <p className="lead">
-                Janet is a skincare professional whose work begins with respect for the individual. Her approach is
-                rooted in natural beauty, intentional care, and confidence that comes not from trends — but from truly
-                understanding the skin.
+                Janet is a skincare professional whose work is defined by professionalism, precision, and deep respect
+                for the individual. Her approach is calm and intentional—rooted in skin science, thoughtful care, and
+                the belief that true confidence comes from understanding the skin, not chasing trends.
               </p>
             </Reveal>
 
@@ -57,13 +60,14 @@ export default function AboutPage() {
             <Reveal delay={0.26} y={12}>
               <div className="body">
                 <p>
-                  This practice was created in response to an industry that too often prioritizes appearance over
-                  substance. Here, treatments are never rushed. Each appointment begins with listening — and with
-                  building a plan that reflects the real needs of the skin and the person behind it.
+                  This practice was created with a clear philosophy: quality over quantity, and care over speed. Every
+                  appointment is unhurried and client-focused—beginning with attentive listening, careful skin analysis,
+                  and a personalized plan designed around what your skin truly needs.
                 </p>
                 <p>
-                  Janet’s philosophy is simple: beauty is a practice, not a moment. It emerges when skin is healthy,
-                  cared for, and treated with respect over time.
+                  Janet is known for her attention to detail and her honest, ethical recommendations. Safety, comfort,
+                  and trust are essential in every treatment, with a focus on long-term skin health and refined results
+                  that remain beautiful over time.
                 </p>
               </div>
             </Reveal>
@@ -89,7 +93,16 @@ export default function AboutPage() {
         }
 
         .leftCol{ position: relative; z-index: 1; }
-        .rightCol{ position: relative; z-index: 1; }
+
+        /* ✅ важно: чтобы карточка values ровно тянулась по ширине */
+        .rightCol{
+          position: relative;
+          z-index: 1;
+          display:flex;
+          flex-direction: column;
+          gap: 14px;
+          align-items: stretch;
+        }
 
         .kicker{
           font-size: 12px;
@@ -137,33 +150,152 @@ export default function AboutPage() {
         .body p{ margin: 0; }
         .body p + p{ margin-top: 18px; }
 
+        /* ✅ VALUES: ровный “дорогой” минимализм (2 колонки, без буллетов/цифр) */
+        .values{
+          width: 100%;
+          border-radius: 24px;
+          background: rgba(255,255,255,0.14);
+          border: 1px solid rgba(46,42,37,0.08);
+          box-shadow: 0 18px 60px rgba(0,0,0,0.05);
+          overflow: hidden;
+        }
+
+        .valuesInner{
+          padding: 16px 18px 14px;
+        }
+
+        .valuesKicker{
+          font-size: 11px;
+          letter-spacing: .26em;
+          text-transform: uppercase;
+          color: rgba(46,42,37,0.55);
+        }
+
+        .valuesRule{
+          margin-top: 10px;
+          height: 1px;
+          background: linear-gradient(to right,
+            rgba(46,42,37,0),
+            rgba(46,42,37,0.14),
+            rgba(46,42,37,0)
+          );
+        }
+
+        .valuesList{
+          margin: 12px 0 0;
+          padding: 0;
+          list-style: none;
+          display:flex;
+          flex-direction: column;
+        }
+
+        .valuesRow{
+          display:grid;
+          grid-template-columns: 190px 1fr;
+          gap: 14px;
+          padding: 10px 0;
+          border-top: 1px solid rgba(46,42,37,0.08);
+        }
+        .valuesRow:first-child{ border-top: 0; }
+
+        .vName{
+          font-weight: 600;
+          color: rgba(46,42,37,0.90);
+          line-height: 1.35;
+        }
+
+        .vDesc{
+          color: rgba(46,42,37,0.62);
+          line-height: 1.55;
+        }
+
+        .valuesRow:hover .vDesc{
+          color: rgba(46,42,37,0.70);
+        }
+
         @media (max-width: 980px){
           .topGrid{
             grid-template-columns: 1fr;
             gap: 22px;
           }
-
-          .rightCol{
-            margin-top: 0 !important;
-            z-index: 1;
-          }
-
           .title{ font-size: 44px; }
         }
 
         @media (max-width: 520px){
           .about{ padding: 68px 0 56px; }
           .title{ font-size: 36px; }
+
+          .valuesInner{ padding: 14px 14px 12px; }
+
+          .valuesRow{
+            grid-template-columns: 1fr;
+            gap: 6px;
+          }
+
+          .vName{ font-size: 14px; }
+          .vDesc{ font-size: 14px; }
         }
       `}</style>
     </section>
   );
 }
 
+function CoreValues() {
+  const items = useMemo(
+    () =>
+      [
+        ["Professionalism", "Clear standards and respectful communication."],
+        ["Quality over quantity", "Fewer appointments—more intention and precision."],
+        ["Personalized care", "Built around your skin, lifestyle, and goals."],
+        ["Unhurried treatments", "Never rushed, never routine."],
+        ["Attention to detail", "Refined outcomes through thoughtful execution."],
+        ["Honest recommendations", "What supports your skin—no pressure, no upselling."],
+        ["Safety & comfort", "A calm space grounded in trust."],
+        ["Long-term results", "Skin health first—for results that last."],
+      ] as const,
+    []
+  );
+
+  return (
+    <div className="values" aria-label="Core professional values">
+      <div className="valuesInner">
+        <div className="valuesKicker">My Core Professional Values</div>
+        <div className="valuesRule" />
+
+        <motion.ul
+          className="valuesList"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={{
+            hidden: { opacity: 1 },
+            show: { opacity: 1, transition: { staggerChildren: 0.035, delayChildren: 0.02 } },
+          }}
+        >
+          {items.map(([name, desc]) => (
+            <motion.li
+              key={name}
+              className="valuesRow"
+              variants={{
+                hidden: { opacity: 0, y: 6 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.45, ease } },
+              }}
+            >
+              <div className="vName">{name}</div>
+              <div className="vDesc">{desc}</div>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </div>
+    </div>
+  );
+}
+
+/* ---- ниже твой PortraitCarousel + Fact (без изменений по логике) ---- */
+
 function PortraitCarousel() {
   const reduce = useReducedMotion();
 
-  // ✅ добавили objectPosition per-slide (подгонишь если надо)
   const slides = useMemo(
     () => [
       { src: "/images/about/portrait-1.jpg", alt: "Founder portrait 1", pos: "50% 18%" },
@@ -234,7 +366,6 @@ function PortraitCarousel() {
                 if (info.offset.x > 60) prev();
               }}
             >
-              {/* ✅ placeholder показываем ТОЛЬКО пока фото не загрузилось (убирает “watermark”) */}
               {!showRealImage && (
                 <div className="placeholder" aria-hidden="true">
                   <div className="mono">JE</div>
@@ -253,15 +384,10 @@ function PortraitCarousel() {
                   objectPosition: slides[index].pos,
                   opacity: showRealImage ? 1 : 0,
                   transition: "opacity 260ms ease",
-                  // ✅ чуть “оживляем” фото (меньше тусклости)
                   filter: "brightness(1.06) contrast(1.04) saturate(1.05)",
                 }}
-                onLoadingComplete={() => {
-                  setImgOk((m) => ({ ...m, [index]: true }));
-                }}
-                onError={() => {
-                  setImgOk((m) => ({ ...m, [index]: false }));
-                }}
+                onLoadingComplete={() => setImgOk((m) => ({ ...m, [index]: true }))}
+                onError={() => setImgOk((m) => ({ ...m, [index]: false }))}
               />
             </motion.div>
           </AnimatePresence>
@@ -312,7 +438,6 @@ function PortraitCarousel() {
           box-shadow: 0 34px 110px rgba(0,0,0,0.12);
         }
 
-        /* ✅ важно: слой с картинкой выше placeholder, но ниже overlay/nav */
         .img{ position:absolute; inset:0; z-index: 1; }
 
         .placeholder{
@@ -328,7 +453,7 @@ function PortraitCarousel() {
           flex-direction: column;
           gap: 10px;
           color: rgba(46,42,37,0.70);
-          z-index: 0; /* ✅ больше не перекрывает фото */
+          z-index: 0;
         }
         .mono{
           font-family: ui-serif;
@@ -343,7 +468,6 @@ function PortraitCarousel() {
           opacity: 0.55;
         }
 
-        /* ✅ ослабили “дымку”, чтобы фото не было тусклым */
         .overlay{
           position:absolute;
           inset:0;
@@ -354,12 +478,11 @@ function PortraitCarousel() {
           z-index: 2;
         }
 
-        /* ✅ меньше шума = меньше мутности */
         .grain{
           position:absolute;
           inset:-40%;
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
-          opacity: 0.045; /* было 0.085 */
+          opacity: 0.045;
           mix-blend-mode: overlay;
           transform: rotate(8deg);
           pointer-events:none;
