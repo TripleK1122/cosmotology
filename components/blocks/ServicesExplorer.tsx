@@ -204,7 +204,9 @@ export default function ServicesExplorer() {
       <Modal open={!!activeService} onClose={() => setActiveService(null)} title="">
         {activeService && (
           <div className="modal">
-            {activeService.image ? <div className="modalHero" style={{ backgroundImage: `url(${activeService.image})` }} /> : null}
+            {activeService.image ? (
+              <div className="modalHero" style={{ backgroundImage: `url(${activeService.image})` }} />
+            ) : null}
 
             <div className="modalBody">
               <div className="modalRow">
@@ -244,8 +246,8 @@ export default function ServicesExplorer() {
             </div>
 
             <p className="modalText">
-              We work with trusted, professional-grade skincare brands. Product selection is confirmed during your consultation to match your
-              skin type and goals.
+              We work with trusted, professional-grade skincare brands. Product selection is confirmed during your
+              consultation to match your skin type and goals.
             </p>
 
             <div className="productsGrid">
@@ -260,8 +262,8 @@ export default function ServicesExplorer() {
                 />
                 <div className="productName">Bio Jouvance Paris</div>
                 <div className="productDesc">
-                  French-inspired professional skincare with advanced formulas that support hydration, texture, and a healthy-looking glow—ideal
-                  for treatment protocols and post-care routines.
+                  French-inspired professional skincare with advanced formulas that support hydration, texture, and a
+                  healthy-looking glow—ideal for treatment protocols and post-care routines.
                 </div>
                 <a className="productLink" href="https://biojouvance.com/" target="_blank" rel="noreferrer">
                   biojouvance.com →
@@ -279,8 +281,8 @@ export default function ServicesExplorer() {
                 />
                 <div className="productName">BelleCôte Paris</div>
                 <div className="productDesc">
-                  Premium Paris-based skincare with a clean, minimal approach—designed to support calm, balanced skin and enhance results from
-                  professional facial treatments.
+                  Premium Paris-based skincare with a clean, minimal approach—designed to support calm, balanced skin and
+                  enhance results from professional facial treatments.
                 </div>
                 <a className="productLink" href="https://bellecoteparis.com/" target="_blank" rel="noreferrer">
                   bellecoteparis.com →
@@ -481,8 +483,18 @@ export default function ServicesExplorer() {
 
         .serviceBody{ padding: 18px 18px 16px; position: relative; }
         .serviceName{ font-family: ui-serif; font-size: 28px; color: rgba(46,42,37,0.92); }
-        .serviceMeta{ margin-top: 10px; color: rgba(184,150,74,0.90); font-size: 16px; display:flex; gap: 10px; align-items:center; }
+
+        /* desktop meta stays as you had */
+        .serviceMeta{
+          margin-top: 10px;
+          color: rgba(184,150,74,0.90);
+          font-size: 16px;
+          display:flex;
+          gap: 10px;
+          align-items:center;
+        }
         .dot{ opacity: .7; }
+
         .serviceSub{ margin-top: 14px; color: rgba(46,42,37,0.58); line-height: 1.7; font-size: 16px; }
 
         .serviceMore{
@@ -587,12 +599,12 @@ export default function ServicesExplorer() {
         }
         .productLink:hover{ border-bottom-color: rgba(184,150,74,0.70); }
 
-        /* ✅ MOBILE FIX (читабельно, кнопка не наезжает) */
+        /* ✅ MOBILE FIX + bigger duration/price */
         @media (max-width: 900px){
           .wrap{ padding: 10px 0 26px; }
 
           .topActions{
-            margin-top: 12px;          /* ✅ вместо -60px */
+            margin-top: 12px;
             justify-content: flex-start;
             padding: 0 2px;
           }
@@ -653,7 +665,31 @@ export default function ServicesExplorer() {
           .serviceImg{ height: 210px; }
           .serviceBody{ padding: 16px; }
           .serviceName{ font-size: 22px; line-height: 1.15; }
-          .serviceMeta{ margin-top: 8px; font-size: 13px; gap: 8px; }
+
+          /* ✅ BIGGER + CLEARER meta (duration/price) */
+          .serviceMeta{
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: 650;
+            letter-spacing: 0.01em;
+            gap: 10px;
+            color: rgba(46,42,37,0.92);
+
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: rgba(184,150,74,0.10);
+            border: 1px solid rgba(184,150,74,0.22);
+          }
+          .serviceMeta .dot{ opacity: 0.55; }
+
+          /* slightly emphasize the price when both exist */
+          .serviceMeta span:last-child{
+            font-size: 17px;
+            font-weight: 750;
+          }
 
           .serviceSub{
             margin-top: 10px;

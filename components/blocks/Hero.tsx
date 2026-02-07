@@ -45,7 +45,7 @@ export default function Hero() {
         <div className="grid">
           <div className="left">
             <Reveal delay={0}>
-              <div className="kicker">Private Esthetic Studio</div>
+              <div className="kicker">Private Esthetic Studio • Licensed Professionals</div>
             </Reveal>
 
             <Reveal delay={0.05} y={22}>
@@ -58,8 +58,8 @@ export default function Hero() {
 
             <Reveal delay={0.11} y={18}>
               <p className="sub">
-                Experience transformative skincare in an intimate, private setting. Each treatment is carefully curated
-                to honor your skin&apos;s unique journey.
+                Experience transformative skincare in an intimate, private setting. Every treatment is delivered by
+                licensed professionals working within one shared standard of care — tailored to your skin.
               </p>
             </Reveal>
 
@@ -68,9 +68,7 @@ export default function Hero() {
               <div className="signature">
                 <span className="sigMark" />
                 <span className="sigText">
-                  Calm, precise,{" "}
-                  <span className="sigItalic">intentionally</span>{" "}
-                  personal.
+                  Calm, precise, <span className="sigItalic">intentionally</span> personal — across every treatment.
                 </span>
               </div>
             </Reveal>
@@ -141,7 +139,7 @@ export default function Hero() {
           color: rgba(46,42,37,0.62);
           line-height: 1.85;
           font-size: 17px;
-          max-width: 480px;
+          max-width: 520px;
         }
 
         .signature{

@@ -8,18 +8,18 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const trust = [
   {
-    title: "Licensed / Certified",
-    text: "Professional standards and safe technique.",
-    tag: "Professional care",
+    title: "Medical Team Support",
+    text: "Advanced protocols are supported by licensed medical professionals, ensuring provider-led standards and safety-first care.",
+    tag: "Provider-led",
   },
   {
-    title: "Personalized plan",
-    text: "Built around your skin, goals, and timeline.",
+    title: "Personalized Care Plans",
+    text: "A plan built around your skin, goals, and timeline — guided by shared protocols and consistent standards of care.",
     tag: "Custom approach",
   },
   {
-    title: "Private studio",
-    text: "Quiet, discreet experience — never rushed.",
+    title: "Private Studio Experience",
+    text: "Quiet, discreet experience — never rushed. Calm precision, focused attention, and thoughtful pacing.",
     tag: "Calm environment",
   },
 ] as const;
@@ -34,12 +34,13 @@ export default function ServicesPreview() {
           </Reveal>
 
           <Reveal delay={0.06} y={18}>
-            <h2 className="h-serif title">Why Clients Choose Janet</h2>
+            <h2 className="h-serif title">Why Clients Choose Janet Esthetics</h2>
           </Reveal>
 
           <Reveal delay={0.1} y={14}>
             <p className="sub">
-              A calm, private studio with thoughtful protocols and a plan made for your skin — not trends.
+              A calm, private studio with carefully designed protocols, supported by licensed medical professionals — focused on safety, consistency, and personalized care.
+
             </p>
           </Reveal>
         </div>
@@ -50,16 +51,14 @@ export default function ServicesPreview() {
           viewport={{ once: true, amount: 0.35 }}
           variants={{
             hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: { staggerChildren: 0.08, delayChildren: 0.06 },
-            },
+            show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.06 } },
           }}
-          className="grid"
+          className="trustGrid"
         >
           {trust.map((t) => (
             <motion.div
               key={t.title}
+              className="gridItem"
               variants={{
                 hidden: { opacity: 0, y: 16 },
                 show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
@@ -97,13 +96,12 @@ export default function ServicesPreview() {
       </Container>
 
       <style>{`
-        /* ✅ IMPORTANT: all styles scoped to .svc to not break Hero */
-        .svc{ padding: 44px 0 16px; }
+        .svc{ padding: 28px 0 8px; }
 
         .svc .head{
           text-align: center;
-          margin-bottom: 26px;
-          max-width: 820px;
+          margin-bottom: 16px;
+          max-width: 840px;
           margin-left: auto;
           margin-right: auto;
         }
@@ -116,160 +114,150 @@ export default function ServicesPreview() {
         }
 
         .svc .title{
-          margin: 10px 0 10px;
+          margin: 6px 0 6px;
           font-weight: 500;
-          font-size: 48px;
+          font-size: 40px;
           letter-spacing: -0.02em;
           color: rgba(46,42,37,0.92);
         }
 
         .svc .sub{
           margin: 0 auto;
-          max-width: 640px;
+          max-width: 740px;
           color: rgba(46,42,37,0.58);
-          font-size: 16px;
-          line-height: 1.75;
+          font-size: 15px;
+          line-height: 1.6;
         }
 
-        .svc .grid{
+        /* ✅ IMPORTANT: unique class to avoid conflict with Hero .grid styles */
+        .svc .trustGrid{
           display: grid;
           grid-template-columns: repeat(3, minmax(0,1fr));
-          gap: 22px;
-          margin-top: 22px;
+          gap: 18px;
+          margin-top: 18px;
           align-items: start;
+
+          /* overrides any global min-height from other .grid rules */
+          min-height: 0 !important;
         }
 
-        /* ✅ COMPACT TRUST CARDS (no пустоты) */
+        .svc .gridItem{ height: auto; }
+
         .svc .card{
           position: relative;
+          height: auto;
           display: flex;
           flex-direction: column;
-          padding: 20px;
-          gap: 12px;
-          border-radius: 26px;
+          padding: 14px;
+          gap: 8px;
+          border-radius: 24px;
           background: rgba(255,255,255,0.22);
           border: 1px solid rgba(46,42,37,0.10);
-          box-shadow: 0 18px 44px rgba(0,0,0,0.08);
+          box-shadow: 0 14px 36px rgba(0,0,0,0.07);
           transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
           overflow: hidden;
-
-          height: fit-content;
-          align-self: start;
         }
 
         .svc .card:hover{
           transform: translateY(-3px);
-          box-shadow: 0 34px 90px rgba(0,0,0,0.12);
+          box-shadow: 0 28px 72px rgba(0,0,0,0.10);
           border-color: rgba(184,150,74,0.22);
         }
 
         .svc .top{ position: relative; z-index: 2; }
 
         .svc .cardTitle{
-          font-size: 21px;
-          margin-bottom: 8px;
+          font-size: 19px;
+          margin-bottom: 6px;
           color: rgba(46,42,37,0.92);
-          letter-spacing: -0.01em;
         }
 
         .svc .meta{
           color: rgba(46,42,37,0.62);
-          line-height: 1.7;
-          font-size: 14px;
-          max-width: 420px;
+          line-height: 1.55;
+          font-size: 13px;
+          max-width: 520px;
         }
 
         .svc .media{
-          margin-top: 6px;
+          margin-top: 8px;
           position: relative;
-          border-radius: 18px;
+          border-radius: 16px;
           overflow: hidden;
           border: 1px solid rgba(46,42,37,0.10);
           background:
             radial-gradient(900px 520px at 20% 10%, rgba(184,150,74,0.18), rgba(255,255,255,0) 62%),
             radial-gradient(900px 520px at 80% 30%, rgba(46,42,37,0.08), rgba(255,255,255,0) 62%),
             linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.06));
-          padding: 10px;
-          transition: transform 220ms ease;
+          padding: 8px;
         }
-        .svc .card:hover .media{ transform: translateY(-1px); }
 
         .svc .badge{
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 7px 9px;
-          border-radius: 999px;
+          display:inline-flex;
+          align-items:center;
+          gap:8px;
+          padding:6px 8px;
+          border-radius:999px;
           background: rgba(250,244,236,0.78);
-          border: 1px solid rgba(46,42,37,0.10);
+          border:1px solid rgba(46,42,37,0.10);
           backdrop-filter: blur(10px);
-          font-size: 11.5px;
-          letter-spacing: 0.02em;
+          font-size:11px;
           color: rgba(46,42,37,0.75);
-          width: fit-content;
-          position: relative;
-          z-index: 2;
         }
 
         .svc .badgeDot{
-          width: 7px;
-          height: 7px;
-          border-radius: 999px;
+          width:7px; height:7px;
+          border-radius:999px;
           background: rgba(184,150,74,0.95);
-          box-shadow: 0 0 0 5px rgba(184,150,74,0.12);
+          box-shadow: 0 0 0 4px rgba(184,150,74,0.12);
         }
 
-        .svc .mini{ margin-top: 8px; position: relative; z-index: 2; }
+        .svc .mini{ margin-top:6px; }
 
         .svc .miniLabel{
-          font-size: 11px;
+          font-size: 10.5px;
           color: rgba(46,42,37,0.55);
           letter-spacing: 0.06em;
           text-transform: uppercase;
-          margin-bottom: 7px;
+          margin-bottom:6px;
         }
 
-        .svc .miniRow{
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
+        .svc .miniRow{ display:flex; gap:8px; flex-wrap:wrap; }
 
         .svc .chip{
-          font-size: 11.5px;
-          padding: 6px 9px;
-          border-radius: 999px;
+          font-size:11px;
+          padding:5px 8px;
+          border-radius:999px;
           background: rgba(46,42,37,0.06);
-          border: 1px solid rgba(46,42,37,0.10);
+          border:1px solid rgba(46,42,37,0.10);
           color: rgba(46,42,37,0.72);
-          line-height: 1;
         }
 
         .svc .shine{
-          position: absolute;
-          inset: 0;
+          position:absolute;
+          inset:0;
           background: radial-gradient(500px 240px at 30% 0%, rgba(255,255,255,0.30), rgba(255,255,255,0) 60%);
-          opacity: 0.7;
-          pointer-events: none;
+          opacity:0.7;
+          pointer-events:none;
         }
 
         .svc .ring{
           position:absolute;
-          inset: -2px;
-          border-radius: 28px;
+          inset:-2px;
+          border-radius:26px;
           background:
             radial-gradient(900px 520px at 15% 15%, rgba(184,150,74,0.16), rgba(255,255,255,0) 60%),
             radial-gradient(900px 520px at 85% 0%, rgba(46,42,37,0.10), rgba(255,255,255,0) 58%);
-          opacity: 0.0;
-          transition: opacity 220ms ease;
+          opacity:0;
+          transition:opacity 220ms ease;
           pointer-events:none;
         }
         .svc .card:hover .ring{ opacity: 1; }
 
         @media (max-width: 900px){
-          .svc .grid{ grid-template-columns: 1fr; }
-          .svc .title{ font-size: 36px; }
-          .svc .card{ padding: 18px; border-radius: 22px; }
+          .svc .trustGrid{ grid-template-columns: 1fr; }
+          .svc .title{ font-size: 34px; }
+          .svc .card{ padding: 14px; border-radius: 22px; }
         }
       `}</style>
     </section>
