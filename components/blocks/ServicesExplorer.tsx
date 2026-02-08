@@ -484,7 +484,7 @@ export default function ServicesExplorer() {
         .serviceBody{ padding: 18px 18px 16px; position: relative; }
         .serviceName{ font-family: ui-serif; font-size: 28px; color: rgba(46,42,37,0.92); }
 
-        /* desktop meta stays as you had */
+        /* desktop meta unchanged */
         .serviceMeta{
           margin-top: 10px;
           color: rgba(184,150,74,0.90);
@@ -599,7 +599,7 @@ export default function ServicesExplorer() {
         }
         .productLink:hover{ border-bottom-color: rgba(184,150,74,0.70); }
 
-        /* ✅ MOBILE FIX + bigger duration/price */
+        /* ✅ MOBILE FIX + meta: gold, delicate, bigger */
         @media (max-width: 900px){
           .wrap{ padding: 10px 0 26px; }
 
@@ -666,30 +666,47 @@ export default function ServicesExplorer() {
           .serviceBody{ padding: 16px; }
           .serviceName{ font-size: 22px; line-height: 1.15; }
 
-          /* ✅ BIGGER + CLEARER meta (duration/price) */
+          /* ✅ NEW MOBILE META STYLE */
           .serviceMeta{
             margin-top: 10px;
-            font-size: 16px;
-            font-weight: 650;
+
+            /* delicate + bigger */
+            font-family: ui-serif;
+            font-size: 17px;
+            font-weight: 500;
             letter-spacing: 0.01em;
-            gap: 10px;
-            color: rgba(46,42,37,0.92);
+
+            /* gold like before */
+            color: rgba(184,150,74,0.98);
 
             display: inline-flex;
             align-items: center;
-            width: fit-content;
-            padding: 8px 10px;
-            border-radius: 999px;
-            background: rgba(184,150,74,0.10);
-            border: 1px solid rgba(184,150,74,0.22);
-          }
-          .serviceMeta .dot{ opacity: 0.55; }
+            gap: 10px;
 
-          /* slightly emphasize the price when both exist */
-          .serviceMeta span:last-child{
-            font-size: 17px;
-            font-weight: 750;
+            /* subtle pill, very delicate */
+            width: fit-content;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(250,244,236,0.78);
+            border: 1px solid rgba(184,150,74,0.24);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.06);
           }
+
+          .serviceMeta .dot{
+            opacity: 0.55;
+            color: rgba(184,150,74,0.70);
+          }
+
+          /* a tiny emphasis on price */
+.serviceMeta span:last-child{
+  font-family: ui-serif;
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: rgba(184,150,74,0.98);
+  text-shadow: 0 2px 6px rgba(184,150,74,0.18);
+}
+
 
           .serviceSub{
             margin-top: 10px;
