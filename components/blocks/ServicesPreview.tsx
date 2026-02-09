@@ -34,13 +34,15 @@ export default function ServicesPreview() {
           </Reveal>
 
           <Reveal delay={0.06} y={18}>
-            <h2 className="h-serif title">Why Clients Choose Janet Esthetics</h2>
+            <h2 className="h-serif title">
+              Why Clients Choose <span className="brandBreak">Janet Esthetics</span>
+            </h2>
           </Reveal>
 
           <Reveal delay={0.1} y={14}>
             <p className="sub">
-              A calm, private studio with carefully designed protocols, supported by licensed medical professionals — focused on safety, consistency, and personalized care.
-
+              A calm, private studio with carefully designed protocols, supported by licensed medical professionals —
+              focused on safety, consistency, and personalized care.
             </p>
           </Reveal>
         </div>
@@ -66,7 +68,11 @@ export default function ServicesPreview() {
             >
               <div className="card">
                 <div className="top">
-                  <div className="h-serif cardTitle">{t.title}</div>
+                  {/* ✅ title highlight (subtle “tab”) */}
+                  <div className="cardTitleWrap">
+                    <div className="h-serif cardTitle">{t.title}</div>
+                  </div>
+
                   <div className="meta">{t.text}</div>
                 </div>
 
@@ -121,6 +127,11 @@ export default function ServicesPreview() {
           color: rgba(46,42,37,0.92);
         }
 
+        /* ✅ desktop: keep in one line naturally */
+        .svc .brandBreak{
+          white-space: nowrap;
+        }
+
         .svc .sub{
           margin: 0 auto;
           max-width: 740px;
@@ -129,15 +140,12 @@ export default function ServicesPreview() {
           line-height: 1.6;
         }
 
-        /* ✅ IMPORTANT: unique class to avoid conflict with Hero .grid styles */
         .svc .trustGrid{
           display: grid;
           grid-template-columns: repeat(3, minmax(0,1fr));
           gap: 18px;
           margin-top: 18px;
           align-items: start;
-
-          /* overrides any global min-height from other .grid rules */
           min-height: 0 !important;
         }
 
@@ -166,10 +174,26 @@ export default function ServicesPreview() {
 
         .svc .top{ position: relative; z-index: 2; }
 
+        /* ✅ NEW: subtle “tab” behind title */
+        .svc .cardTitleWrap{
+          display: inline-flex;
+          align-items: center;
+          padding: 6px 10px;
+          margin-bottom: 8px;
+          border-radius: 12px;
+          background: rgba(250,244,236,0.75);
+          border: 1px solid rgba(46,42,37,0.10);
+          box-shadow: 0 10px 24px rgba(46,42,37,0.06);
+        }
+
+        /* ✅ title is slightly larger + cleaner */
         .svc .cardTitle{
-          font-size: 19px;
-          margin-bottom: 6px;
-          color: rgba(46,42,37,0.92);
+          font-size: 21px; /* was 19px */
+          line-height: 1.25;
+          font-weight: 500;
+          color: rgba(46,42,37,0.95);
+          letter-spacing: -0.01em;
+          margin: 0; /* ensure no unexpected spacing */
         }
 
         .svc .meta{
@@ -177,6 +201,7 @@ export default function ServicesPreview() {
           line-height: 1.55;
           font-size: 13px;
           max-width: 520px;
+          margin-top: 2px;
         }
 
         .svc .media{
@@ -258,6 +283,15 @@ export default function ServicesPreview() {
           .svc .trustGrid{ grid-template-columns: 1fr; }
           .svc .title{ font-size: 34px; }
           .svc .card{ padding: 14px; border-radius: 22px; }
+
+          /* ✅ mobile: force Janet Esthetics to second line */
+          .svc .brandBreak{
+            display: block;
+            white-space: normal;
+          }
+
+          /* slight bump for readability on mobile */
+          .svc .cardTitle{ font-size: 22px; }
         }
       `}</style>
     </section>

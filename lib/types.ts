@@ -1,5 +1,5 @@
 // lib/types.ts
-export type CategoryId = "injectables" | "facial" | "mens" | "weightloss";
+export type CategoryId = "injectables" | "facial" | "mens" | "weightloss" | "peelings";
 
 export type Category = {
     id: CategoryId;

@@ -25,4 +25,12 @@ export const categories: Category[] = [
         description: "Guided support & progress",
         image: "/images/categories/weightloss.jpg",
     },
+
+    // ✅ NEW
+    {
+        id: "peelings",
+        title: "Peelings",
+        description: "Clarity, texture, and renewed glow",
+        image: "/images/categories/peelings.jpg",
+    },
 ];

@@ -21,8 +21,8 @@ export default function Hero() {
       if (!el) return;
 
       const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width; // 0..1
-      const y = (e.clientY - r.top) / r.height; // 0..1
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
 
       const rx = (0.5 - y) * 2.6;
       const ry = (x - 0.5) * 2.6;
@@ -43,7 +43,7 @@ export default function Hero() {
     <section className="hero">
       <Container>
         <div className="grid">
-          <div className="left">
+          <div className="left rhythm">
             <Reveal delay={0}>
               <div className="kicker">Private Esthetic Studio • Licensed Professionals</div>
             </Reveal>
@@ -63,7 +63,6 @@ export default function Hero() {
               </p>
             </Reveal>
 
-            {/* signature accent line */}
             <Reveal delay={0.15} y={14}>
               <div className="signature">
                 <span className="sigMark" />
@@ -125,6 +124,12 @@ export default function Hero() {
           min-height: 560px;
         }
 
+        /* ✅ CONSISTENT VERTICAL SPACING (same rhythm across breakpoints) */
+        .rhythm > * + *{ margin-top: 18px; }
+        @media (max-width: 520px){
+          .rhythm > * + *{ margin-top: 16px; }
+        }
+
         .title{
           font-weight: 500;
           font-size: 72px;
@@ -135,7 +140,7 @@ export default function Hero() {
         }
 
         .sub{
-          margin-top: 18px;
+          margin-top: 0;
           color: rgba(46,42,37,0.62);
           line-height: 1.85;
           font-size: 17px;
@@ -143,7 +148,7 @@ export default function Hero() {
         }
 
         .signature{
-          margin-top: 18px;
+          margin-top: 0;
           display: inline-flex;
           align-items: center;
           gap: 10px;
@@ -172,7 +177,7 @@ export default function Hero() {
         }
 
         .ctaRow{
-          margin-top: 22px;
+          margin-top: 0;
           display: flex;
           align-items: center;
           gap: 14px;
@@ -291,7 +296,8 @@ export default function Hero() {
         }
 
         @media (max-width: 520px){
-          .hero{ padding: 50px 0 18px; }
+          /* ✅ keep hero spacing consistent */
+          .hero{ padding: 70px 0 28px; }
           .title{ font-size: 42px; }
           .sub{ font-size: 16px; }
           .card{ height: 300px; }

@@ -484,7 +484,6 @@ export default function ServicesExplorer() {
         .serviceBody{ padding: 18px 18px 16px; position: relative; }
         .serviceName{ font-family: ui-serif; font-size: 28px; color: rgba(46,42,37,0.92); }
 
-        /* desktop meta unchanged */
         .serviceMeta{
           margin-top: 10px;
           color: rgba(184,150,74,0.90);
@@ -524,12 +523,60 @@ export default function ServicesExplorer() {
         .modalHero{ height: 320px; background-size: cover; background-position: center; }
         .modalBody{ padding: 22px; }
         .modalRow{ display:flex; justify-content:space-between; align-items:flex-start; gap: 16px; }
-        .modalTitle{ font-family: ui-serif; font-size: 44px; margin: 0; color: rgba(46,42,37,0.92); }
-        .modalPrice{ font-family: ui-serif; font-size: 34px; color: rgba(46,42,37,0.88); margin-top: 6px; }
-        .modalDuration{ margin-top: 10px; color: rgba(184,150,74,0.90); font-size: 18px; }
-        .modalSectionTitle{ margin-top: 22px; font-family: ui-serif; font-size: 24px; color: rgba(46,42,37,0.92); }
-        .modalText{ margin-top: 10px; color: rgba(46,42,37,0.60); line-height: 1.8; font-size: 18px; }
-        .list{ margin-top: 12px; color: rgba(46,42,37,0.60); line-height: 1.8; padding-left: 22px; font-size: 18px; }
+
+        /* ✅ NEW: delicate modal typography */
+        .modalTitle{
+          font-family: ui-serif;
+          font-size: 40px;              /* was 44px */
+          line-height: 1.08;
+          font-weight: 500;             /* was “bold-ish” by default */
+          letter-spacing: -0.015em;
+          margin: 0;
+          color: rgba(46,42,37,0.92);
+          max-width: 76%;
+        }
+
+        .modalPrice{
+          font-family: ui-serif;
+          font-size: 30px;              /* was 34px */
+          font-weight: 500;
+          letter-spacing: -0.01em;
+          color: rgba(46,42,37,0.78);   /* softer */
+          margin-top: 6px;
+          white-space: nowrap;
+        }
+
+        .modalDuration{
+          margin-top: 10px;
+          color: rgba(184,150,74,0.92);
+          font-size: 16px;              /* was 18px */
+          letter-spacing: 0.01em;
+        }
+
+        .modalSectionTitle{
+          margin-top: 22px;
+          font-family: ui-serif;
+          font-size: 22px;              /* was 24px */
+          font-weight: 500;
+          letter-spacing: -0.01em;
+          color: rgba(46,42,37,0.90);
+        }
+
+        .modalText{
+          margin-top: 10px;
+          color: rgba(46,42,37,0.60);
+          line-height: 1.85;
+          font-size: 17px;              /* was 18px */
+        }
+
+        .list{
+          margin-top: 12px;
+          color: rgba(46,42,37,0.60);
+          line-height: 1.85;
+          padding-left: 22px;
+          font-size: 17px;              /* was 18px */
+        }
+
         .ctaWrap{ margin-top: 26px; }
         .cta{
           width: 100%;
@@ -666,24 +713,16 @@ export default function ServicesExplorer() {
           .serviceBody{ padding: 16px; }
           .serviceName{ font-size: 22px; line-height: 1.15; }
 
-          /* ✅ NEW MOBILE META STYLE */
           .serviceMeta{
             margin-top: 10px;
-
-            /* delicate + bigger */
             font-family: ui-serif;
             font-size: 17px;
             font-weight: 500;
             letter-spacing: 0.01em;
-
-            /* gold like before */
             color: rgba(184,150,74,0.98);
-
             display: inline-flex;
             align-items: center;
             gap: 10px;
-
-            /* subtle pill, very delicate */
             width: fit-content;
             padding: 7px 10px;
             border-radius: 999px;
@@ -697,16 +736,14 @@ export default function ServicesExplorer() {
             color: rgba(184,150,74,0.70);
           }
 
-          /* a tiny emphasis on price */
-.serviceMeta span:last-child{
-  font-family: ui-serif;
-  font-weight: 400;
-  font-size: 20px;
-  letter-spacing: 0.02em;
-  color: rgba(184,150,74,0.98);
-  text-shadow: 0 2px 6px rgba(184,150,74,0.18);
-}
-
+          .serviceMeta span:last-child{
+            font-family: ui-serif;
+            font-weight: 400;
+            font-size: 20px;
+            letter-spacing: 0.02em;
+            color: rgba(184,150,74,0.98);
+            text-shadow: 0 2px 6px rgba(184,150,74,0.18);
+          }
 
           .serviceSub{
             margin-top: 10px;
@@ -722,9 +759,17 @@ export default function ServicesExplorer() {
 
           .modalHero{ height: 220px; }
           .modalBody{ padding: 18px; }
-          .modalTitle{ font-size: 28px; line-height: 1.1; }
-          .modalPrice{ font-size: 22px; }
+
+          /* ✅ MOBILE modal: more delicate + wraps nicely */
+          .modalTitle{
+            font-size: 28px;
+            line-height: 1.12;
+            font-weight: 500;
+            max-width: 72%;
+          }
+          .modalPrice{ font-size: 20px; font-weight: 500; }
           .modalText, .list{ font-size: 16px; }
+          .modalSectionTitle{ font-size: 20px; }
 
           .productsGrid{ grid-template-columns: 1fr; }
           .productImg{ height: 160px; }

@@ -1,16 +1,19 @@
-import { injectables } from "./injectables";
 import { facial } from "./facial";
+import { injectables } from "./injectables";
 import { mens } from "./mens";
 import { weightloss } from "./weightloss";
+import { peelings } from "./peelings";
+
 import type { CategoryId, Service } from "@/lib/types";
 
-export const services: Service[] = [
-    ...injectables,
-    ...facial,
-    ...mens,
-    ...weightloss,
-];
+const byCategory: Record<CategoryId, Service[]> = {
+    injectables,
+    facial,
+    mens,
+    weightloss,
+    peelings,
+};
 
-export function getServicesByCategory(categoryId: CategoryId): Service[] {
-    return services.filter((s) => s.categoryId === categoryId);
+export function getServicesByCategory(category: CategoryId) {
+    return byCategory[category] ?? [];
 }
