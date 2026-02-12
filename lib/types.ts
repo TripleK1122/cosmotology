@@ -1,5 +1,12 @@
 // lib/types.ts
-export type CategoryId = "injectables" | "facial" | "mens" | "weightloss" | "peelings";
+
+export type CategoryId =
+    | "mesotherapy"
+    | "prp"
+    | "facial"
+    | "mens"
+    | "weightloss"
+    | "peelings";
 
 export type Category = {
     id: CategoryId;
@@ -18,4 +25,7 @@ export type Service = {
     benefits: string[];
     whoFor: string[];
     image?: string;
+
+    group?: "Skin Rejuvenation" | "Hair Restoration";
 };
+

@@ -1,5 +1,6 @@
 import { facial } from "./facial";
-import { injectables } from "./injectables";
+import { mesotherapy } from "./mesotherapy";
+import { prp } from "./prp";
 import { mens } from "./mens";
 import { weightloss } from "./weightloss";
 import { peelings } from "./peelings";
@@ -7,7 +8,8 @@ import { peelings } from "./peelings";
 import type { CategoryId, Service } from "@/lib/types";
 
 const byCategory: Record<CategoryId, Service[]> = {
-    injectables,
+    mesotherapy,
+    prp,
     facial,
     mens,
     weightloss,

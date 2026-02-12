@@ -25,6 +25,19 @@ export default function ServicesExplorer() {
     return getServicesByCategory(activeCategory);
   }, [activeCategory]);
 
+  // ✅ NEW: group PRP services by "group"
+  const groupedItems = useMemo(() => {
+    if (activeCategory !== "prp") return null;
+
+    return items.reduce<Record<string, Service[]>>((acc, s) => {
+      const key = s.group ?? "Other";
+      (acc[key] ??= []).push(s);
+      return acc;
+    }, {});
+  }, [items, activeCategory]);
+
+  const groupOrder = ["Skin Rejuvenation", "Hair Restoration", "Other"] as const;
+
   const activeCat = useMemo(() => {
     if (!activeCategory) return null;
     return categories.find((c) => c.id === activeCategory) ?? null;
@@ -45,6 +58,47 @@ export default function ServicesExplorer() {
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+  }
+
+  // ✅ helper: renders one service card (reused for grouped + non-grouped)
+  function renderServiceCard(s: Service) {
+    return (
+      <motion.button
+        key={s.slug}
+        type="button"
+        className="serviceCard"
+        onClick={() => setActiveService(s)}
+        variants={{
+          hidden: { opacity: 0, y: 12 },
+          show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+        }}
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.995 }}
+        transition={{ duration: 0.18 }}
+      >
+        {s.image ? <div className="serviceImg" style={{ backgroundImage: `url(${s.image})` }} /> : null}
+
+        <div className="serviceBody">
+          <div className="serviceTop">
+            <div className="serviceName">{s.title}</div>
+
+            <div className="serviceMeta">
+              {s.duration ? <span>{s.duration}</span> : null}
+              {s.duration && s.price ? <span className="dot">•</span> : null}
+              {s.price ? <span>{s.price}</span> : null}
+            </div>
+          </div>
+
+          <div className="serviceSub">{s.subtitle}</div>
+
+          <div className="serviceMore">
+            View details <span className="arrow">→</span>
+          </div>
+
+          <div className="glow" />
+        </div>
+      </motion.button>
+    );
   }
 
   return (
@@ -149,8 +203,9 @@ export default function ServicesExplorer() {
               </div>
             </div>
 
+            {/* ✅ NEW: grouped rendering for PRP, default rendering for others */}
             <motion.div
-              className="serviceGrid"
+              className={groupedItems ? "groupWrap" : "serviceGrid"}
               initial="hidden"
               animate="show"
               variants={{
@@ -158,43 +213,30 @@ export default function ServicesExplorer() {
                 show: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
               }}
             >
-              {items.map((s) => (
-                <motion.button
-                  key={s.slug}
-                  type="button"
-                  className="serviceCard"
-                  onClick={() => setActiveService(s)}
-                  variants={{
-                    hidden: { opacity: 0, y: 12 },
-                    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
-                  }}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.995 }}
-                  transition={{ duration: 0.18 }}
-                >
-                  {s.image ? <div className="serviceImg" style={{ backgroundImage: `url(${s.image})` }} /> : null}
+              {groupedItems ? (
+                <>
+                  {groupOrder
+                    .filter((g) => groupedItems[g]?.length)
+                    .map((groupName) => (
+                      <div key={groupName} className="groupSection">
+                        <div className="groupHeader">
+                          <div className="groupTitle">{groupName}</div>
+                          <div className="groupDesc">
+                            {groupName === "Skin Rejuvenation"
+                              ? "PRP-based rejuvenation for face, neck, and hands."
+                              : groupName === "Hair Restoration"
+                                ? "PRP scalp treatments to support healthier follicles and growth."
+                                : ""}
+                          </div>
+                        </div>
 
-                  <div className="serviceBody">
-                    <div className="serviceTop">
-                      <div className="serviceName">{s.title}</div>
-
-                      <div className="serviceMeta">
-                        {s.duration ? <span>{s.duration}</span> : null}
-                        {s.duration && s.price ? <span className="dot">•</span> : null}
-                        {s.price ? <span>{s.price}</span> : null}
+                        <div className="serviceGrid">{groupedItems[groupName].map(renderServiceCard)}</div>
                       </div>
-                    </div>
-
-                    <div className="serviceSub">{s.subtitle}</div>
-
-                    <div className="serviceMore">
-                      View details <span className="arrow">→</span>
-                    </div>
-
-                    <div className="glow" />
-                  </div>
-                </motion.button>
-              ))}
+                    ))}
+                </>
+              ) : (
+                items.map(renderServiceCard)
+              )}
             </motion.div>
           </motion.div>
         ) : null}
@@ -431,6 +473,24 @@ export default function ServicesExplorer() {
         .servicesHeader{ display:flex; align-items:flex-end; justify-content:space-between; gap: 14px; flex-wrap:wrap; }
         .servicesTitle{ font-family: ui-serif; font-size: 40px; color: rgba(46,42,37,0.92); }
         .servicesHint{ color: rgba(46,42,37,0.55); margin-top: 6px; }
+
+        /* ✅ NEW: PRP group styling */
+        .groupWrap{ margin-top: 18px; }
+        .groupSection{ margin-top: 26px; }
+        .groupSection:first-child{ margin-top: 0; }
+
+        .groupHeader{ margin: 8px 2px 12px; }
+        .groupTitle{
+          font-family: ui-serif;
+          font-size: 26px;
+          color: rgba(46,42,37,0.90);
+        }
+        .groupDesc{
+          margin-top: 6px;
+          color: rgba(46,42,37,0.55);
+          font-size: 14px;
+          line-height: 1.6;
+        }
 
         .servicesActions{
           display:flex;
@@ -701,6 +761,10 @@ export default function ServicesExplorer() {
           .servicesActions{ width: 100%; justify-content: flex-start; flex-wrap: wrap; }
           .servicesTitle{ font-size: 22px; }
           .servicesHint{ font-size: 13px; }
+
+          /* ✅ NEW: group typography on mobile */
+          .groupTitle{ font-size: 20px; }
+          .groupDesc{ font-size: 13px; }
 
           .serviceGrid{
             margin-top: 14px;

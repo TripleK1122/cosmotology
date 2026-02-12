@@ -2,10 +2,16 @@ import type { Category } from "@/lib/types";
 
 export const categories: Category[] = [
     {
-        id: "injectables",
-        title: "Injectables",
-        description: "Refined results with a natural finish",
-        image: "/images/categories/injectables.jpg",
+        id: "mesotherapy",
+        title: "Mesotherapy",
+        description: "Targeted skin infusion for hydration + glow",
+        image: "/images/categories/mesotherapy.jpg",
+    },
+    {
+        id: "prp",
+        title: "PRP Treatments",
+        description: "Platelet-rich plasma rejuvenation for skin + hair",
+        image: "/images/categories/prp.jpg",
     },
     {
         id: "facial",
@@ -25,8 +31,6 @@ export const categories: Category[] = [
         description: "Guided support & progress",
         image: "/images/categories/weightloss.jpg",
     },
-
-    // ✅ NEW
     {
         id: "peelings",
         title: "Peelings",

@@ -1,34 +1,14 @@
 import type { Service } from "@/lib/types";
 
-export const injectables: Service[] = [
-    {
-        slug: "exosomes-injectable-facial",
-        categoryId: "injectables",
-        title: "Exosomes Injectable Facial",
-        subtitle:
-            "A next-generation regenerative treatment designed to support skin renewal, tone, and vitality.",
-        duration: "60 minutes",
-        price: "$250",
-        benefits: ["Supports renewal", "Improves tone + texture", "Boosts vitality glow"],
-        whoFor: ["Dullness", "Texture", "Dehydrated skin", "Post-treatment support"],
-        image: "",
-    },
-    {
-        slug: "exosomes-package-3-sessions",
-        categoryId: "injectables",
-        title: "Exosomes Package (3 Sessions)",
-        subtitle:
-            "A curated multi-visit plan for more consistent, progressive results over time.",
-        duration: "60 minutes",
-        price: "$675",
-        benefits: ["Progressive results", "Consistency over time", "Better long-term glow"],
-        whoFor: ["Best results seekers", "Series treatment plan", "Texture + tone"],
-        image: "",
-    },
+export const prp: Service[] = [
+    // =====================
+    // SKIN REJUVENATION
+    // =====================
 
     {
         slug: "prp-face-treatment",
-        categoryId: "injectables",
+        categoryId: "prp",
+        group: "Skin Rejuvenation",
         title: "PRP Face Treatment",
         subtitle:
             "PRP (Platelet-Rich Plasma) facial rejuvenation using your own blood plasma to support a refreshed, healthier look.",
@@ -40,7 +20,8 @@ export const injectables: Service[] = [
     },
     {
         slug: "prp-face-neck-treatment",
-        categoryId: "injectables",
+        categoryId: "prp",
+        group: "Skin Rejuvenation",
         title: "PRP Face + Neck Treatment",
         subtitle:
             "A focused PRP session for face and neck to support smoother texture and a more even, refreshed appearance.",
@@ -52,7 +33,8 @@ export const injectables: Service[] = [
     },
     {
         slug: "prp-face-hands-treatment",
-        categoryId: "injectables",
+        categoryId: "prp",
+        group: "Skin Rejuvenation",
         title: "PRP Face + Hands Treatment",
         subtitle:
             "PRP rejuvenation for face and hands to support volume, tone, and a more youthful look.",
@@ -62,10 +44,10 @@ export const injectables: Service[] = [
         whoFor: ["Hands aging", "Dullness", "Texture", "Natural results"],
         image: "",
     },
-
     {
         slug: "prp-face-neck-package-3-sessions",
-        categoryId: "injectables",
+        categoryId: "prp",
+        group: "Skin Rejuvenation",
         title: "PRP Face + Neck Package (3 Sessions)",
         subtitle:
             "A 3-session package designed for progressive improvement and longer-lasting results.",
@@ -75,10 +57,28 @@ export const injectables: Service[] = [
         whoFor: ["Best results seekers", "Series plan", "Face + neck rejuvenation"],
         image: "",
     },
+    {
+        slug: "prp-hand-treatment",
+        categoryId: "prp",
+        group: "Skin Rejuvenation",
+        title: "PRP Hand Treatment",
+        subtitle:
+            "A rejuvenating procedure that uses platelet-rich plasma to support volume and improve the look of hands.",
+        duration: "60 minutes",
+        price: "$200",
+        benefits: ["Improves hand texture", "Supports volume", "More even tone"],
+        whoFor: ["Hands aging", "Dryness", "Crepey texture"],
+        image: "",
+    },
+
+    // =====================
+    // HAIR RESTORATION
+    // =====================
 
     {
         slug: "prp-hair-restoration",
-        categoryId: "injectables",
+        categoryId: "prp",
+        group: "Hair Restoration",
         title: "PRP Hair Restoration",
         subtitle:
             "PRP for hair is a treatment that uses your own blood to support healthier follicles and stimulate growth.",
@@ -90,7 +90,8 @@ export const injectables: Service[] = [
     },
     {
         slug: "prp-hair-restoration-package-3-sessions",
-        categoryId: "injectables",
+        categoryId: "prp",
+        group: "Hair Restoration",
         title: "PRP Hair Restoration Package (3 Sessions)",
         subtitle:
             "A 3-session plan designed to build momentum and improve results over time.",
@@ -102,7 +103,8 @@ export const injectables: Service[] = [
     },
     {
         slug: "prp-hair-restoration-package-5-sessions",
-        categoryId: "injectables",
+        categoryId: "prp",
+        group: "Hair Restoration",
         title: "PRP Hair Restoration Package (5 Sessions)",
         subtitle:
             "An extended 5-session package for stronger, more consistent long-term support.",
@@ -110,19 +112,6 @@ export const injectables: Service[] = [
         price: "$1350",
         benefits: ["Extended series", "Long-term support", "More consistent progress"],
         whoFor: ["Advanced plan", "Long-term results", "Thinning hair"],
-        image: "",
-    },
-
-    {
-        slug: "prp-hand-treatment",
-        categoryId: "injectables",
-        title: "PRP Hand Treatment",
-        subtitle:
-            "A rejuvenating procedure that uses platelet-rich plasma to support volume and improve the look of hands.",
-        duration: "60 minutes",
-        price: "$200",
-        benefits: ["Improves hand texture", "Supports volume", "More even tone"],
-        whoFor: ["Hands aging", "Dryness", "Crepey texture"],
         image: "",
     },
 ];
