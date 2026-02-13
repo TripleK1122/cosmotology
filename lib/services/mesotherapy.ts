@@ -2,15 +2,23 @@ import type { Service } from "@/lib/types";
 
 export const mesotherapy: Service[] = [
     {
-        slug: "mesotherapy-facial",
+        slug: "mesotherapy",
         categoryId: "mesotherapy",
-        title: "Mesotherapy Facial",
+        title: "Mesotherapy",
         subtitle:
-            "A targeted micro-infusion treatment designed to improve hydration, tone, and overall radiance.",
-        duration: "60 minutes",
-        price: "$___",
-        benefits: ["Deep hydration", "Improves tone + glow", "Supports smoother texture"],
-        whoFor: ["Dullness", "Dehydrated skin", "Uneven tone", "Texture"],
+            "Mesotherapy is a refined injectable treatment designed to support collagen production and enhance structural skin integrity. Through precise dermal micro-infusions of customized active complexes, the skin appears visibly firmer, smoother, and revitalized from within.\n\nFormulations may include hyaluronic acid, advanced peptides, polynucleotides, collagen stimulators, or PRP — carefully selected to improve elasticity, tone, and overall skin quality.\n\nThe result: sculpted definition, refined texture, and a naturally lifted, age-defying glow.",
+        benefits: [
+            "Supports collagen production",
+            "Improves firmness + elasticity",
+            "Refines texture + tone",
+            "Naturally lifted glow"
+        ],
+        whoFor: [
+            "Loss of firmness",
+            "Fine lines",
+            "Uneven texture",
+            "Dull skin"
+        ],
         image: "",
     },
 ];

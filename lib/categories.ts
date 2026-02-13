@@ -4,13 +4,13 @@ export const categories: Category[] = [
     {
         id: "mesotherapy",
         title: "Mesotherapy",
-        description: "Targeted skin infusion for hydration + glow",
+        description: "Lift. Firm. Rejuvenate.",
         image: "/images/categories/mesotherapy.jpg",
     },
     {
         id: "prp",
         title: "PRP Treatments",
-        description: "Platelet-rich plasma rejuvenation for skin + hair",
+        description: "Skin Rejuvenation & Hair Restoration",
         image: "/images/categories/prp.jpg",
     },
     {
@@ -21,7 +21,7 @@ export const categories: Category[] = [
     },
     {
         id: "mens",
-        title: "Men’s Services",
+        title: "Tailored Treatments for Men",
         description: "Clean, tailored treatments for men",
         image: "/images/categories/mens.jpg",
     },
@@ -33,8 +33,8 @@ export const categories: Category[] = [
     },
     {
         id: "peelings",
-        title: "Peelings",
-        description: "Clarity, texture, and renewed glow",
+        title: "Peels",
+        description: "Clarity, refined texture, and renewed glow",
         image: "/images/categories/peelings.jpg",
     },
 ];
