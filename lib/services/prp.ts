@@ -16,7 +16,6 @@ export const prp: Service[] = [
         price: "$300",
         benefits: ["Natural rejuvenation", "Supports collagen", "Improves overall tone"],
         whoFor: ["Fine lines", "Texture", "Dullness", "Natural approach"],
-        image: "",
     },
     {
         slug: "prp-face-neck-treatment",
@@ -29,7 +28,6 @@ export const prp: Service[] = [
         price: "$350",
         benefits: ["Targets face + neck", "Natural skin support", "Improves tone + texture"],
         whoFor: ["Face + neck concerns", "Early aging signs", "Texture"],
-        image: "",
     },
     {
         slug: "prp-face-hands-treatment",

@@ -25,7 +25,7 @@ export default function ServicesExplorer() {
     return getServicesByCategory(activeCategory);
   }, [activeCategory]);
 
-  // ✅ NEW: group PRP services by "group"
+  // ✅ group PRP services by "group"
   const groupedItems = useMemo(() => {
     if (activeCategory !== "prp") return null;
 
@@ -62,6 +62,9 @@ export default function ServicesExplorer() {
 
   // ✅ helper: renders one service card (reused for grouped + non-grouped)
   function renderServiceCard(s: Service) {
+    const hasMeta = Boolean(s.duration || s.price);
+    const isMesotherapy = activeCategory === "mesotherapy"; // ✅ fade only there
+
     return (
       <motion.button
         key={s.slug}
@@ -82,14 +85,25 @@ export default function ServicesExplorer() {
           <div className="serviceTop">
             <div className="serviceName">{s.title}</div>
 
-            <div className="serviceMeta">
-              {s.duration ? <span>{s.duration}</span> : null}
-              {s.duration && s.price ? <span className="dot">•</span> : null}
-              {s.price ? <span>{s.price}</span> : null}
-            </div>
+            {/* ✅ meta ONLY when has duration/price */}
+            {hasMeta ? (
+              <div className="serviceMeta">
+                {s.duration ? <span className="metaDur">{s.duration}</span> : null}
+                {s.duration && s.price ? <span className="dot">•</span> : null}
+                {s.price ? <span className="metaPrice">{s.price}</span> : null}
+              </div>
+            ) : null}
           </div>
 
-          <div className="serviceSub">{s.subtitle}</div>
+          {/* ✅ Subtitle: normal for all, fade ONLY for Mesotherapy */}
+          {isMesotherapy ? (
+            <div className="serviceSub serviceSub--meso">
+              <div className="mesoText">{s.subtitle}</div>
+              <div className="mesoFade" aria-hidden="true" />
+            </div>
+          ) : (
+            <div className="serviceSub">{s.subtitle}</div>
+          )}
 
           <div className="serviceMore">
             View details <span className="arrow">→</span>
@@ -203,7 +217,6 @@ export default function ServicesExplorer() {
               </div>
             </div>
 
-            {/* ✅ NEW: grouped rendering for PRP, default rendering for others */}
             <motion.div
               className={groupedItems ? "groupWrap" : "serviceGrid"}
               initial="hidden"
@@ -259,7 +272,7 @@ export default function ServicesExplorer() {
               {activeService.duration ? <div className="modalDuration">{activeService.duration}</div> : null}
 
               <div className="modalSectionTitle">About This Treatment</div>
-              <p className="modalText">{activeService.subtitle}</p>
+              <p className="modalText whitespace-pre-line">{activeService.subtitle}</p>
 
               <div className="modalSectionTitle">Benefits</div>
               <ul className="list">
@@ -288,24 +301,19 @@ export default function ServicesExplorer() {
             </div>
 
             <p className="modalText">
-              We work with trusted, professional-grade skincare brands. Product selection is confirmed during your
-              consultation to match your skin type and goals.
+              We work with trusted, professional-grade skincare brands. Product selection is confirmed during your consultation to match your skin type and goals.
             </p>
 
             <div className="productsGrid">
               <div className="productCard">
                 <div
                   className="productImg"
-                  style={{
-                    backgroundImage: "url(/images/products/biojouvance.jpg)",
-                    backgroundPosition: "50% 70%",
-                  }}
+                  style={{ backgroundImage: "url(/images/products/biojouvance.jpg)", backgroundPosition: "50% 70%" }}
                   aria-label="Bio Jouvance Paris"
                 />
                 <div className="productName">Bio Jouvance Paris</div>
                 <div className="productDesc">
-                  French-inspired professional skincare with advanced formulas that support hydration, texture, and a
-                  healthy-looking glow—ideal for treatment protocols and post-care routines.
+                  French-inspired professional skincare with advanced formulas that support hydration, texture, and a healthy-looking glow—ideal for treatment protocols and post-care routines.
                 </div>
                 <a className="productLink" href="https://biojouvance.com/" target="_blank" rel="noreferrer">
                   biojouvance.com →
@@ -315,16 +323,12 @@ export default function ServicesExplorer() {
               <div className="productCard">
                 <div
                   className="productImg"
-                  style={{
-                    backgroundImage: "url(/images/products/bellecote.jpg)",
-                    backgroundPosition: "50% 70%",
-                  }}
+                  style={{ backgroundImage: "url(/images/products/bellecote.jpg)", backgroundPosition: "50% 70%" }}
                   aria-label="BelleCôte Paris"
                 />
                 <div className="productName">BelleCôte Paris</div>
                 <div className="productDesc">
-                  Premium Paris-based skincare with a clean, minimal approach—designed to support calm, balanced skin and
-                  enhance results from professional facial treatments.
+                  Premium Paris-based skincare with a clean, minimal approach—designed to support calm, balanced skin and enhance results from professional facial treatments.
                 </div>
                 <a className="productLink" href="https://bellecoteparis.com/" target="_blank" rel="noreferrer">
                   bellecoteparis.com →
@@ -350,6 +354,7 @@ export default function ServicesExplorer() {
           cursor: pointer;
           font: inherit;
           color: inherit;
+          -webkit-tap-highlight-color: transparent;
         }
         .catCard:focus, .serviceCard:focus, .backBtn:focus, .productsMiniBtn:focus { outline: none; }
         .catCard:focus-visible, .serviceCard:focus-visible, .backBtn:focus-visible, .productsMiniBtn:focus-visible{
@@ -474,7 +479,7 @@ export default function ServicesExplorer() {
         .servicesTitle{ font-family: ui-serif; font-size: 40px; color: rgba(46,42,37,0.92); }
         .servicesHint{ color: rgba(46,42,37,0.55); margin-top: 6px; }
 
-        /* ✅ NEW: PRP group styling */
+        /* PRP group styling */
         .groupWrap{ margin-top: 18px; }
         .groupSection{ margin-top: 26px; }
         .groupSection:first-child{ margin-top: 0; }
@@ -544,17 +549,50 @@ export default function ServicesExplorer() {
         .serviceBody{ padding: 18px 18px 16px; position: relative; }
         .serviceName{ font-family: ui-serif; font-size: 28px; color: rgba(46,42,37,0.92); }
 
+        /* ✅ Meta: more contrast (desktop/tablet) */
         .serviceMeta{
           margin-top: 10px;
-          color: rgba(184,150,74,0.90);
-          font-size: 16px;
-          display:flex;
+          display: inline-flex;
           gap: 10px;
-          align-items:center;
-        }
-        .dot{ opacity: .7; }
+          align-items: center;
 
-        .serviceSub{ margin-top: 14px; color: rgba(46,42,37,0.58); line-height: 1.7; font-size: 16px; }
+          font-family: ui-serif;
+          font-size: 16px;
+          font-weight: 600;
+
+          color: rgba(110, 84, 28, 0.92);
+          background: rgba(255,255,255,0.55);
+          border: 1px solid rgba(110, 84, 28, 0.22);
+          padding: 6px 10px;
+          border-radius: 999px;
+          box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+        }
+        .serviceMeta .dot{ opacity: 0.45; }
+        .metaDur, .metaPrice{ color: inherit; }
+
+        /* Default subtitle (as was) */
+        .serviceSub{
+          margin-top: 14px;
+          color: rgba(46,42,37,0.58);
+          line-height: 1.7;
+          font-size: 16px;
+        }
+
+        /* Mesotherapy ONLY: fade */
+        .serviceSub--meso{ position: relative; }
+        .mesoText{
+          white-space: pre-line;
+          max-height: 170px;
+          overflow: hidden;
+        }
+        .mesoFade{
+          pointer-events:none;
+          position:absolute;
+          left:0; right:0;
+          bottom:0;
+          height: 56px;
+          background: linear-gradient(to top, rgba(250,244,236,0.92), rgba(250,244,236,0));
+        }
 
         .serviceMore{
           margin-top: 16px;
@@ -584,12 +622,11 @@ export default function ServicesExplorer() {
         .modalBody{ padding: 22px; }
         .modalRow{ display:flex; justify-content:space-between; align-items:flex-start; gap: 16px; }
 
-        /* ✅ NEW: delicate modal typography */
         .modalTitle{
           font-family: ui-serif;
-          font-size: 40px;              /* was 44px */
+          font-size: 40px;
           line-height: 1.08;
-          font-weight: 500;             /* was “bold-ish” by default */
+          font-weight: 500;
           letter-spacing: -0.015em;
           margin: 0;
           color: rgba(46,42,37,0.92);
@@ -598,10 +635,10 @@ export default function ServicesExplorer() {
 
         .modalPrice{
           font-family: ui-serif;
-          font-size: 30px;              /* was 34px */
+          font-size: 30px;
           font-weight: 500;
           letter-spacing: -0.01em;
-          color: rgba(46,42,37,0.78);   /* softer */
+          color: rgba(46,42,37,0.78);
           margin-top: 6px;
           white-space: nowrap;
         }
@@ -609,14 +646,14 @@ export default function ServicesExplorer() {
         .modalDuration{
           margin-top: 10px;
           color: rgba(184,150,74,0.92);
-          font-size: 16px;              /* was 18px */
+          font-size: 16px;
           letter-spacing: 0.01em;
         }
 
         .modalSectionTitle{
           margin-top: 22px;
           font-family: ui-serif;
-          font-size: 22px;              /* was 24px */
+          font-size: 22px;
           font-weight: 500;
           letter-spacing: -0.01em;
           color: rgba(46,42,37,0.90);
@@ -626,7 +663,7 @@ export default function ServicesExplorer() {
           margin-top: 10px;
           color: rgba(46,42,37,0.60);
           line-height: 1.85;
-          font-size: 17px;              /* was 18px */
+          font-size: 17px;
         }
 
         .list{
@@ -634,7 +671,7 @@ export default function ServicesExplorer() {
           color: rgba(46,42,37,0.60);
           line-height: 1.85;
           padding-left: 22px;
-          font-size: 17px;              /* was 18px */
+          font-size: 17px;
         }
 
         .ctaWrap{ margin-top: 26px; }
@@ -706,7 +743,7 @@ export default function ServicesExplorer() {
         }
         .productLink:hover{ border-bottom-color: rgba(184,150,74,0.70); }
 
-        /* ✅ MOBILE FIX + meta: gold, delicate, bigger */
+        /* MOBILE */
         @media (max-width: 900px){
           .wrap{ padding: 10px 0 26px; }
 
@@ -762,7 +799,6 @@ export default function ServicesExplorer() {
           .servicesTitle{ font-size: 22px; }
           .servicesHint{ font-size: 13px; }
 
-          /* ✅ NEW: group typography on mobile */
           .groupTitle{ font-size: 20px; }
           .groupDesc{ font-size: 13px; }
 
@@ -777,38 +813,43 @@ export default function ServicesExplorer() {
           .serviceBody{ padding: 16px; }
           .serviceName{ font-size: 22px; line-height: 1.15; }
 
+          /* ✅ MOBILE meta: force same contrast for both duration + price */
           .serviceMeta{
             margin-top: 10px;
             font-family: ui-serif;
-            font-size: 17px;
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 650;
             letter-spacing: 0.01em;
-            color: rgba(184,150,74,0.98);
+
+            color: rgba(110, 84, 28, 0.92) !important;
+            background: rgba(255,255,255,0.62);
+            border: 1px solid rgba(110, 84, 28, 0.24);
+            padding: 7px 10px;
+            border-radius: 999px;
+            box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+
             display: inline-flex;
             align-items: center;
             gap: 10px;
             width: fit-content;
-            padding: 7px 10px;
-            border-radius: 999px;
-            background: rgba(250,244,236,0.78);
-            border: 1px solid rgba(184,150,74,0.24);
-            box-shadow: 0 10px 26px rgba(0,0,0,0.06);
           }
 
           .serviceMeta .dot{
-            opacity: 0.55;
-            color: rgba(184,150,74,0.70);
+            opacity: 0.45;
+            color: rgba(110, 84, 28, 0.70);
           }
 
+          /* ✅ IMPORTANT: this was overriding your price color */
           .serviceMeta span:last-child{
             font-family: ui-serif;
-            font-weight: 400;
-            font-size: 20px;
-            letter-spacing: 0.02em;
-            color: rgba(184,150,74,0.98);
-            text-shadow: 0 2px 6px rgba(184,150,74,0.18);
+            font-weight: 650;
+            font-size: 16px;
+            letter-spacing: 0.01em;
+            color: rgba(110, 84, 28, 0.92) !important;
+            text-shadow: none;
           }
 
+          /* “as was”: clamp subtitle on mobile */
           .serviceSub{
             margin-top: 10px;
             font-size: 14px;
@@ -819,12 +860,22 @@ export default function ServicesExplorer() {
             overflow: hidden;
           }
 
+          /* Mesotherapy fade still allowed on mobile */
+          .serviceSub--meso{
+            display: block;
+            overflow: visible;
+          }
+          .serviceSub--meso .mesoText{
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 150px;
+          }
+
           .serviceMore{ margin-top: 12px; font-size: 14px; }
 
           .modalHero{ height: 220px; }
           .modalBody{ padding: 18px; }
 
-          /* ✅ MOBILE modal: more delicate + wraps nicely */
           .modalTitle{
             font-size: 28px;
             line-height: 1.12;
