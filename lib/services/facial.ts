@@ -2,195 +2,257 @@ import type { Service } from "@/lib/types";
 
 export const facial: Service[] = [
     {
-        slug: "express-signature-facial",
+        slug: "acne-clarifying-deep-clean-facial",
         categoryId: "facial",
-        title: "Express Signature Facial",
+        title: "Acne Clarifying Deep Clean Facial",
         subtitle:
-            "A refined 45-minute facial for an instant glow — cleanse, exfoliate, and hydrate for a fresh, polished look.",
-        duration: "45 minutes",
-        price: "",
-        benefits: ["Quick glow boost", "Smoother texture", "Hydration + brightness"],
-        whoFor: ["Busy schedules", "Dullness", "Pre-event refresh"],
-        image: "",
-    },
-    {
-        slug: "microneedling-new-client",
-        categoryId: "facial",
-        title: "Microneedling – New Client",
-        subtitle:
-            "A first-time microneedling appointment focused on a safe, personalized plan for visible improvement over time.",
-        duration: "45 minutes",
-        price: "",
-        benefits: ["Custom plan", "Skin assessment", "Best protocol selection"],
-        whoFor: ["New microneedling clients", "Texture", "Fine lines", "Scars"],
-        image: "",
-    },
-    {
-        slug: "acne-clarifying-facial",
-        categoryId: "facial",
-        title: "Acne Clarifying Facial",
-        subtitle:
-            "Designed for breakout-prone skin. Deep cleansing, gentle exfoliation, and targeted care to calm congestion.",
+            "A corrective acne treatment designed to manage active breakouts, inflammation, and congestion while deeply cleansing and rebalancing the skin.",
         duration: "90 minutes",
-        price: "$140",
-        benefits: ["Decongests pores", "Helps reduce breakouts", "Calms inflammation"],
-        whoFor: ["Acne-prone skin", "Clogged pores", "Oily skin"],
+        price: "$145",
+        benefits: [
+            "Deep pore cleansing",
+            "Helps calm inflammation",
+            "Supports acne-prone skin",
+        ],
+        whoFor: ["Active acne", "Congestion", "Inflammation", "Oily skin"],
         image: "",
     },
+
+    {
+        slug: "advanced-customized-facial",
+        categoryId: "facial",
+        title: "Advanced Customized Facial",
+        subtitle:
+            "A customized facial designed just for you. Every step — from cleansing and exfoliation to treatment and finishing care — is tailored to your skin’s needs.",
+        duration: "75 minutes",
+        price: "$135",
+        benefits: [
+            "Personalized treatment plan",
+            "Balanced hydration and glow",
+            "Targets multiple skin concerns",
+        ],
+        whoFor: ["All skin types", "First-time clients", "Maintenance facials"],
+        image: "",
+    },
+
     {
         slug: "back-facial",
         categoryId: "facial",
         title: "Back Facial",
         subtitle:
-            "A professional treatment for the back that cleanses, exfoliates, and nourishes the skin for a clearer look.",
+            "A professional treatment for the back that cleanses, exfoliates, and nourishes the skin to improve clarity and smoothness.",
         duration: "90 minutes",
         price: "$150",
-        benefits: ["Deep cleanse for back", "Smoother skin", "Helps with congestion"],
-        whoFor: ["Back breakouts", "Rough texture", "Congestion"],
+        benefits: [
+            "Deep cleansing for the back",
+            "Helps with congestion",
+            "Leaves skin smoother",
+        ],
+        whoFor: ["Back acne", "Rough texture", "Congestion"],
         image: "",
     },
+
     {
-        slug: "basic-facial",
+        slug: "buccal-sculpting-massage",
         categoryId: "facial",
-        title: "Basic Facial",
+        title: "Buccal Sculpting Massage",
         subtitle:
-            "A simple, classic facial to cleanse, refresh, and deeply hydrate the skin — perfect for routine maintenance.",
-        duration: "60 minutes",
-        price: "$100",
-        benefits: ["Cleansing + hydration", "Skin balance", "Healthy glow"],
-        whoFor: ["All skin types", "Monthly maintenance", "First-time clients"],
+            "An advanced facial massage technique that works both externally and inside the cheeks to release deep tension and support natural facial contouring.",
+        duration: "30 minutes",
+        price: "$85",
+        benefits: [
+            "Releases facial tension",
+            "Supports contouring",
+            "Promotes circulation",
+        ],
+        whoFor: ["Jaw tension", "Facial puffiness", "Sculpting-focused care"],
         image: "",
     },
-    {
-        slug: "c202-facial",
-        categoryId: "facial",
-        title: "C202 Facial",
-        subtitle:
-            "Perfect for dull, tired, or dehydrated skin — targets early signs of aging for a brighter, smoother look.",
-        duration: "90 minutes",
-        price: "$140",
-        benefits: ["Hydration boost", "Brightening", "Smoother texture"],
-        whoFor: ["Dehydration", "Dullness", "Early aging signs"],
-        image: "",
-    },
-    {
-        slug: "circadia-enzyme-therapy",
-        categoryId: "facial",
-        title: "Circadia Enzyme Therapy",
-        subtitle:
-            "A professional enzyme treatment to refine texture, brighten, and support a clearer, more even complexion.",
-        duration: "75 minutes",
-        price: "$140",
-        benefits: ["Gentle resurfacing", "Glow", "Improved clarity"],
-        whoFor: ["Sensitive resurfacing", "Dullness", "Texture"],
-        image: "",
-    },
+
     {
         slug: "consultation",
         categoryId: "facial",
         title: "Consultation",
         subtitle:
-            "A personalized session to understand your skin and choose the most suitable treatments and routine.",
-        duration: "15 minutes",
+            "Our consultation is a personalized session designed to help you choose the most suitable treatment plan based on your skin goals and concerns.",
+        duration: "30 minutes",
         price: "$30",
-        benefits: ["Personalized plan", "Treatment selection", "Clear next steps"],
-        whoFor: ["New clients", "Unsure what to choose", "Planning a series"],
+        benefits: [
+            "Treatment guidance",
+            "Personalized recommendations",
+            "Clear next steps",
+        ],
+        whoFor: ["New clients", "Unsure where to start", "Treatment planning"],
         image: "",
     },
-    {
-        slug: "customized-facial",
-        categoryId: "facial",
-        title: "Customized Facial",
-        subtitle:
-            "A tailored facial built around your skin’s needs — every step is customized for visible comfort and results.",
-        duration: "75 minutes",
-        price: "$135",
-        benefits: ["Fully customized", "Balanced skin", "Glow + hydration"],
-        whoFor: ["All skin types", "First-time clients", "Ongoing maintenance"],
-        image: "",
-    },
+
     {
         slug: "dermaplaning",
         categoryId: "facial",
         title: "Dermaplaning",
         subtitle:
-            "A gentle treatment using a sterile surgical scalpel to remove dead skin cells and peach fuzz for a smoother finish.",
+            "A gentle treatment using a sterile surgical scalpel to carefully remove dead skin cells and fine facial hair for a smoother, brighter finish.",
         duration: "60 minutes",
         price: "$130",
-        benefits: ["Smoother makeup application", "Brighter look", "Soft texture"],
-        whoFor: ["Dullness", "Rough texture", "Peach fuzz"],
+        benefits: [
+            "Removes dead skin buildup",
+            "Leaves skin smoother",
+            "Helps makeup apply better",
+        ],
+        whoFor: ["Dull skin", "Rough texture", "Peach fuzz"],
         image: "",
     },
+
     {
         slug: "hydro-glow-facial",
         categoryId: "facial",
         title: "Hydro Glow Facial",
         subtitle:
-            "A gentle hydro-infusion facial that cleanses, refreshes, and deeply hydrates for a luminous, plump finish.",
+            "Hydro Glow Facial is a gentle hydro-infusion treatment that cleanses, refreshes, and deeply hydrates the skin for a plump, radiant finish.",
         duration: "75 minutes",
-        price: "$140",
-        benefits: ["Deep hydration", "Glow", "Fresh, clean finish"],
-        whoFor: ["Dehydrated skin", "Dullness", "Events"],
+        price: "$129",
+        benefits: [
+            "Deep hydration",
+            "Fresh radiant glow",
+            "Leaves skin soft and plump",
+        ],
+        whoFor: ["Dehydrated skin", "Dull skin", "Pre-event glow"],
         image: "",
     },
+
     {
-        slug: "luxe-lift-anti-aging-facial",
+        slug: "luxury-age-defying-power-lift-facial",
         categoryId: "facial",
-        title: "Luxe Lift Powerful Anti-Aging Facial",
+        title: "Luxury Age-Defying Power Lift Facial",
         subtitle:
-            "A luxurious treatment by Circadia that smooths, lifts, and rejuvenates the skin for a more refined appearance.",
+            "Not just a facial — a sculpting, collagen-activating luxury treatment designed to visibly lift, firm, and rejuvenate the skin.",
         duration: "90 minutes",
         price: "$155",
-        benefits: ["Smoother look", "Lifted feel", "Brighter tone"],
+        benefits: [
+            "Supports lifting effect",
+            "Encourages firmer-looking skin",
+            "Luxurious rejuvenation",
+        ],
         whoFor: ["Mature skin", "Loss of firmness", "Fine lines"],
         image: "",
     },
-    {
-        slug: "microchanneling",
-        categoryId: "facial",
-        title: "Microchanneling",
-        subtitle:
-            "A minimally invasive treatment that creates micro-channels to support skin renewal and improve texture and tone.",
-        duration: "60 minutes",
-        price: "$185",
-        benefits: ["Smoother texture", "Improved tone", "Refined pores"],
-        whoFor: ["Texture", "Fine lines", "Uneven tone"],
-        image: "",
-    },
+
     {
         slug: "microcurrent",
         categoryId: "facial",
         title: "Microcurrent",
         subtitle:
-            "A non-invasive facial treatment using low-level electrical currents to support facial contour and glow.",
+            "Microcurrent is a non-invasive facial treatment that uses low-level electrical currents to stimulate facial muscles and support a more sculpted appearance.",
         duration: "60 minutes",
-        price: "$160",
-        benefits: ["Lifted look", "Sculpted feel", "Glow boost"],
-        whoFor: ["Loss of firmness", "Dullness", "Special events"],
+        price: "$159",
+        benefits: [
+            "Supports facial contour",
+            "Non-invasive lifting effect",
+            "Boosts circulation",
+        ],
+        whoFor: ["Loss of firmness", "Facial contouring", "Pre-event treatment"],
         image: "",
     },
+
     {
         slug: "microneedling",
         categoryId: "facial",
         title: "Microneedling",
         subtitle:
-            "A skin treatment that uses tiny needles to create micro-channels and support renewal for smoother, clearer skin.",
+            "Facial microneedling is an advanced collagen-induction treatment designed specifically for the face to improve texture, tone, and overall skin quality.",
         duration: "60 minutes",
-        price: "$220",
-        benefits: ["Improved texture", "Helps fine lines", "Supports scar improvement"],
-        whoFor: ["Fine lines", "Acne scarring", "Texture"],
+        price: "$199",
+        benefits: [
+            "Supports collagen production",
+            "Improves texture",
+            "Helps soften acne marks",
+        ],
+        whoFor: ["Texture concerns", "Fine lines", "Acne scarring"],
         image: "",
     },
+
+    {
+        slug: "microneedling-neck-decollete",
+        categoryId: "facial",
+        title: "Microneedling for Neck + Décolleté",
+        subtitle:
+            "An advanced collagen-induction treatment that rejuvenates the neck and chest area by improving texture, firmness, and overall skin appearance.",
+        duration: "75 minutes",
+        price: "$249",
+        benefits: [
+            "Targets neck and chest",
+            "Improves texture",
+            "Supports firmer-looking skin",
+        ],
+        whoFor: ["Neck lines", "Décolleté aging", "Texture concerns"],
+        image: "",
+    },
+
     {
         slug: "microneedling-with-exosomes",
         categoryId: "facial",
         title: "Microneedling with Exosomes",
         subtitle:
-            "Microneedling + exosomes to support repair, reduce fine lines, improve scars and pigmentation for a more even look.",
+            "Microneedling + exosomes stimulate skin repair, reduce fine lines, scars, and pigmentation, leaving your skin smoother and more radiant.",
         duration: "60 minutes",
-        price: "$250",
-        benefits: ["Enhanced recovery support", "Brighter tone", "Smoother texture"],
-        whoFor: ["Texture", "Scars", "Pigmentation", "Fine lines"],
+        price: "$299",
+        benefits: [
+            "Enhanced skin renewal support",
+            "Helps with pigmentation and scars",
+            "Improves texture and glow",
+        ],
+        whoFor: ["Scarring", "Pigmentation", "Fine lines", "Texture concerns"],
+        image: "",
+    },
+
+    {
+        slug: "oxygen-facial-treatment",
+        categoryId: "facial",
+        title: "Oxygen Facial Treatment",
+        subtitle:
+            "Oxygen Facial is an advanced oxygen treatment designed for tired, dull, or dehydrated skin to restore brightness and vitality.",
+        duration: "90 minutes",
+        price: "$150",
+        benefits: [
+            "Refreshes tired-looking skin",
+            "Boosts hydration",
+            "Promotes a brighter appearance",
+        ],
+        whoFor: ["Dull skin", "Dehydration", "Tired complexion"],
+        image: "",
+    },
+
+    {
+        slug: "peptide-firming-sculpt-facial",
+        categoryId: "facial",
+        title: "Peptide Firming & Sculpt Facial",
+        subtitle:
+            "A sculpting, collagen-activating treatment designed to visibly lift, firm, and improve skin elasticity.",
+        duration: "90 minutes",
+        price: "$145",
+        benefits: [
+            "Supports firmness",
+            "Improves elasticity",
+            "Sculpting-focused facial care",
+        ],
+        whoFor: ["Loss of firmness", "Early aging signs"],
+        image: "",
+    },
+
+    {
+        slug: "sculpting-facial-massage",
+        categoryId: "facial",
+        title: "Sculpting Facial Massage",
+        subtitle:
+            "A lifting facial massage designed to stimulate circulation, improve lymphatic drainage, and naturally sculpt facial contours.",
+        duration: "30 minutes",
+        price: "$70",
+        benefits: [
+            "Stimulates circulation",
+            "Supports lymphatic drainage",
+            "Naturally sculpts facial contours",
+        ],
+        whoFor: ["Puffiness", "Facial tension", "Natural sculpting care"],
         image: "",
     },
 ];

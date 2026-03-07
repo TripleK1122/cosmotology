@@ -8,138 +8,146 @@ import { motion } from "framer-motion";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const cases = [
-    {
-        title: "Hydra Facial",
-        subtitle: "Texture + glow refinement",
-        before: "/images/results/case-01-before.jpg",
-        after: "/images/results/case-01-after.jpg",
-    },
-    {
-        title: "Chemical Peel",
-        subtitle: "Tone clarity + smoothness",
-        before: "/images/results/case-02-before.jpg",
-        after: "/images/results/case-02-after.jpg",
-    },
-    {
-        title: "LED Therapy",
-        subtitle: "Calm + recovery support",
-        before: "/images/results/case-03-before.jpg",
-        after: "/images/results/case-03-after.jpg",
-    },
-    {
-        title: "Signature Facial",
-        subtitle: "Balanced, healthy finish",
-        before: "/images/results/case-04-before.jpg",
-        after: "/images/results/case-04-after.jpg",
-    },
+  {
+    title: "Hydra Facial",
+    subtitle: "Texture + glow refinement",
+    before: "/images/results/case-01-before.jpg",
+    after: "/images/results/case-01-after.jpg",
+  },
+  {
+    title: "Chemical Peel",
+    subtitle: "Tone clarity + smoothness",
+    before: "/images/results/case-02-before.jpg",
+    after: "/images/results/case-02-after.jpg",
+  },
+  {
+    title: "LED Therapy",
+    subtitle: "Calm + recovery support",
+    before: "/images/results/case-03-before.jpg",
+    after: "/images/results/case-03-after.jpg",
+  },
+  {
+    title: "Signature Facial",
+    subtitle: "Balanced, healthy finish",
+    before: "/images/results/case-04-before.jpg",
+    after: "/images/results/case-04-after.jpg",
+  },
+
+  // NEW
+  {
+    title: "Mesotherapy",
+    subtitle: "Skin texture + rejuvenation",
+    before: "/images/results/mesotherapy-before.jpg",
+    after: "/images/results/mesotherapy-after.jpg",
+  },
 ] as const;
 
 export default function ResultsPremium() {
-    const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
 
-    // ESC closes + block scroll when open
-    useEffect(() => {
-        if (!activeImage) return;
+  // ESC closes + block scroll when open
+  useEffect(() => {
+    if (!activeImage) return;
 
-        const onKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "Escape") setActiveImage(null);
-        };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveImage(null);
+    };
 
-        document.addEventListener("keydown", onKeyDown);
-        const prevOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-        return () => {
-            document.removeEventListener("keydown", onKeyDown);
-            document.body.style.overflow = prevOverflow;
-        };
-    }, [activeImage]);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [activeImage]);
 
-    return (
-        <section className="results">
-            <Container>
-                <div className="head">
-                    <Reveal>
-                        <div className="kicker">Results</div>
-                    </Reveal>
+  return (
+    <section className="results">
+      <Container>
+        <div className="head">
+          <Reveal>
+            <div className="kicker">Results</div>
+          </Reveal>
 
-                    <Reveal delay={0.05}>
-                        <h2 className="title h-serif">Visible Transformations</h2>
-                    </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="title h-serif">Visible Transformations</h2>
+          </Reveal>
 
-                    <Reveal delay={0.1}>
-                        <p className="sub">
-                            Subtle, refined improvements achieved through personalized care and clinically guided protocols.
-                        </p>
-                    </Reveal>
-                </div>
+          <Reveal delay={0.1}>
+            <p className="sub">
+              Subtle, refined improvements achieved through personalized care and clinically guided protocols.
+            </p>
+          </Reveal>
+        </div>
 
-                <motion.div
-                    className="grid"
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, amount: 0.25 }}
-                    variants={{
-                        hidden: { opacity: 0 },
-                        show: { opacity: 1, transition: { staggerChildren: 0.08 } },
-                    }}
+        <motion.div
+          className="grid"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+          }}
+        >
+          {cases.map((c) => (
+            <motion.div
+              key={c.title}
+              className="case"
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+              }}
+            >
+              <div className="images">
+                <button
+                  type="button"
+                  className="img"
+                  style={{ backgroundImage: `url(${c.before})` }}
+                  onClick={() => setActiveImage(c.before)}
+                  aria-label={`${c.title} before`}
                 >
-                    {cases.map((c) => (
-                        <motion.div
-                            key={c.title}
-                            className="case"
-                            variants={{
-                                hidden: { opacity: 0, y: 16 },
-                                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
-                            }}
-                        >
-                            <div className="images">
-                                <button
-                                    type="button"
-                                    className="img"
-                                    style={{ backgroundImage: `url(${c.before})` }}
-                                    onClick={() => setActiveImage(c.before)}
-                                    aria-label={`${c.title} before`}
-                                >
-                                    <span className="label">Before</span>
-                                </button>
+                  <span className="label">Before</span>
+                </button>
 
-                                <button
-                                    type="button"
-                                    className="img"
-                                    style={{ backgroundImage: `url(${c.after})` }}
-                                    onClick={() => setActiveImage(c.after)}
-                                    aria-label={`${c.title} after`}
-                                >
-                                    <span className="label">After</span>
-                                </button>
+                <button
+                  type="button"
+                  className="img"
+                  style={{ backgroundImage: `url(${c.after})` }}
+                  onClick={() => setActiveImage(c.after)}
+                  aria-label={`${c.title} after`}
+                >
+                  <span className="label">After</span>
+                </button>
 
-                                <div className="frame" aria-hidden="true" />
-                            </div>
+                <div className="frame" aria-hidden="true" />
+              </div>
 
-                            <div className="cap">
-                                <div className="caseTitle h-serif">{c.title}</div>
-                                <div className="caseSub">{c.subtitle}</div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
+              <div className="cap">
+                <div className="caseTitle h-serif">{c.title}</div>
+                <div className="caseSub">{c.subtitle}</div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-            </Container>
+      </Container>
 
-            {/* LIGHTBOX */}
-            {activeImage && (
-                <div className="lightbox" onClick={() => setActiveImage(null)} role="dialog" aria-modal="true">
-                    <div className="lightboxInner" onClick={(e) => e.stopPropagation()}>
-                        <img src={activeImage} alt="Result preview" />
-                        <button type="button" className="close" onClick={() => setActiveImage(null)} aria-label="Close preview">
-                            ✕
-                        </button>
-                    </div>
-                </div>
-            )}
+      {/* LIGHTBOX */}
+      {activeImage && (
+        <div className="lightbox" onClick={() => setActiveImage(null)} role="dialog" aria-modal="true">
+          <div className="lightboxInner" onClick={(e) => e.stopPropagation()}>
+            <img src={activeImage} alt="Result preview" />
+            <button type="button" className="close" onClick={() => setActiveImage(null)} aria-label="Close preview">
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
-            <style>{`
+      <style>{`
         .results{ padding: 78px 0 26px; }
 
         .head{
@@ -322,6 +330,6 @@ export default function ResultsPremium() {
           .images{ border-radius: 22px; }
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 }

@@ -1,37 +1,36 @@
-// lib/services/weightloss.ts
 import type { Service } from "@/lib/types";
 
 export const weightloss: Service[] = [
     {
-        slug: "medically-managed-weight-loss-new-patient",
-        categoryId: "weightloss",
-        title: "Medically Managed Weight Loss – New Patient",
-        subtitle:
-            "Our Medically Managed Weight Loss Program is not just another diet — it’s a medically supervised plan designed for real, sustainable change.",
-        duration: "30 minutes",
-        price: "",
-        benefits: [
-            "Medical intake & eligibility review",
-            "Personalized treatment roadmap",
-            "Clear next steps & support plan",
-        ],
-        whoFor: ["New patients", "Anyone starting the program"],
-        image: "", // позже добавишь, например: "/images/services/weightloss-new.jpg"
-    },
-    {
         slug: "medically-managed-weight-loss-follow-up",
         categoryId: "weightloss",
-        title: "Medically Managed Weight Loss – Follow Up",
+        title: "Medically Managed Weight Loss- Follow Up",
         subtitle:
-            "Ongoing check-ins to track progress, adjust your plan, and keep results moving in the right direction.",
+            "Medical Weight Loss – Follow Up. Clinical follow-up appointment to evaluate treatment progress, review response, and adjust your care plan as needed.",
         duration: "30 minutes",
         price: "",
         benefits: [
-            "Progress review & adjustments",
-            "Support & accountability",
-            "Updated plan recommendations",
+            "Progress evaluation",
+            "Treatment plan adjustments",
+            "Clinical follow-up support",
         ],
-        whoFor: ["Existing patients", "Follow-up visits"],
+        whoFor: ["Existing patients", "Ongoing weight loss treatment", "Program follow-up visits"],
+        image: "",
+    },
+    {
+        slug: "medically-managed-weight-loss-new-patient",
+        categoryId: "weightloss",
+        title: "Medically Managed Weight Loss- New Patient",
+        subtitle:
+            "GLP-1 Medical Weight Management Program. Our medically supervised weight management program is designed to support safe, structured, and sustainable results.",
+        duration: "30 minutes",
+        price: "",
+        benefits: [
+            "Initial medical evaluation",
+            "Program eligibility review",
+            "Personalized treatment roadmap",
+        ],
+        whoFor: ["New patients", "Patients starting a GLP-1 program", "Medical weight loss consultation"],
         image: "",
     },
 ];
