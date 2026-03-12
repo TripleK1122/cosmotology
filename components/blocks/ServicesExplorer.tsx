@@ -25,7 +25,6 @@ export default function ServicesExplorer() {
     return getServicesByCategory(activeCategory);
   }, [activeCategory]);
 
-  // ✅ group PRP services by "group"
   const groupedItems = useMemo(() => {
     if (activeCategory !== "prp") return null;
 
@@ -60,10 +59,9 @@ export default function ServicesExplorer() {
     });
   }
 
-  // ✅ helper: renders one service card (reused for grouped + non-grouped)
   function renderServiceCard(s: Service) {
     const hasMeta = Boolean(s.duration || s.price);
-    const isMesotherapy = activeCategory === "mesotherapy"; // ✅ fade only there
+    const isMesotherapy = activeCategory === "mesotherapy";
 
     return (
       <motion.button
@@ -85,7 +83,6 @@ export default function ServicesExplorer() {
           <div className="serviceTop">
             <div className="serviceName">{s.title}</div>
 
-            {/* ✅ meta ONLY when has duration/price */}
             {hasMeta ? (
               <div className="serviceMeta">
                 {s.duration ? <span className="metaDur">{s.duration}</span> : null}
@@ -95,7 +92,6 @@ export default function ServicesExplorer() {
             ) : null}
           </div>
 
-          {/* ✅ Subtitle: normal for all, fade ONLY for Mesotherapy */}
           {isMesotherapy ? (
             <div className="serviceSub serviceSub--meso">
               <div className="mesoText">{s.subtitle}</div>
@@ -255,7 +251,6 @@ export default function ServicesExplorer() {
         ) : null}
       </AnimatePresence>
 
-      {/* MODAL: SERVICE */}
       <Modal open={!!activeService} onClose={() => setActiveService(null)} title="">
         {activeService && (
           <div className="modal">
@@ -292,7 +287,6 @@ export default function ServicesExplorer() {
         )}
       </Modal>
 
-      {/* PRODUCTS MODAL */}
       <Modal open={productsOpen} onClose={() => setProductsOpen(false)} title="">
         <div className="modal">
           <div className="modalBody">
@@ -344,7 +338,6 @@ export default function ServicesExplorer() {
       </Modal>
 
       <style>{`
-        /* RESET */
         .catCard, .serviceCard, .backBtn, .productsMiniBtn{
           appearance: none;
           -webkit-appearance: none;
@@ -363,7 +356,6 @@ export default function ServicesExplorer() {
           border-radius: 26px;
         }
 
-        /* SECTION */
         .wrap{ padding: 15px 0 40px; }
 
         .topActions{
@@ -465,7 +457,6 @@ export default function ServicesExplorer() {
           line-height: 1.55;
         }
 
-        /* SERVICES */
         .servicesBlock{
           margin-top: 42px;
           border-radius: 26px;
@@ -479,7 +470,6 @@ export default function ServicesExplorer() {
         .servicesTitle{ font-family: ui-serif; font-size: 40px; color: rgba(46,42,37,0.92); }
         .servicesHint{ color: rgba(46,42,37,0.55); margin-top: 6px; }
 
-        /* PRP group styling */
         .groupWrap{ margin-top: 18px; }
         .groupSection{ margin-top: 26px; }
         .groupSection:first-child{ margin-top: 0; }
@@ -523,6 +513,7 @@ export default function ServicesExplorer() {
           display:grid;
           grid-template-columns: repeat(2, minmax(0,1fr));
           gap: 18px;
+          align-items: stretch;
         }
 
         .serviceCard{
@@ -534,6 +525,10 @@ export default function ServicesExplorer() {
           transition: box-shadow 200ms ease, border-color 200ms ease;
           text-align:left;
           position: relative;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-self: stretch;
         }
         .serviceCard:hover{
           box-shadow: 0 26px 70px rgba(0,0,0,0.10);
@@ -544,22 +539,35 @@ export default function ServicesExplorer() {
           height: 220px;
           background-size: cover;
           background-position: center;
+          flex-shrink: 0;
         }
 
-        .serviceBody{ padding: 18px 18px 16px; position: relative; }
-        .serviceName{ font-family: ui-serif; font-size: 28px; color: rgba(46,42,37,0.92); }
+        .serviceBody{
+          padding: 18px 18px 16px;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
 
-        /* ✅ Meta: more contrast (desktop/tablet) */
+        .serviceTop{
+          flex-shrink: 0;
+        }
+
+        .serviceName{
+          font-family: ui-serif;
+          font-size: 28px;
+          color: rgba(46,42,37,0.92);
+        }
+
         .serviceMeta{
           margin-top: 10px;
           display: inline-flex;
           gap: 10px;
           align-items: center;
-
           font-family: ui-serif;
           font-size: 16px;
           font-weight: 600;
-
           color: rgba(110, 84, 28, 0.92);
           background: rgba(255,255,255,0.55);
           border: 1px solid rgba(110, 84, 28, 0.22);
@@ -567,10 +575,10 @@ export default function ServicesExplorer() {
           border-radius: 999px;
           box-shadow: 0 10px 24px rgba(0,0,0,0.06);
         }
+
         .serviceMeta .dot{ opacity: 0.45; }
         .metaDur, .metaPrice{ color: inherit; }
 
-        /* Default subtitle (as was) */
         .serviceSub{
           margin-top: 14px;
           color: rgba(46,42,37,0.58);
@@ -578,13 +586,16 @@ export default function ServicesExplorer() {
           font-size: 16px;
         }
 
-        /* Mesotherapy ONLY: fade */
-        .serviceSub--meso{ position: relative; }
+        .serviceSub--meso{
+          position: relative;
+        }
+
         .mesoText{
           white-space: pre-line;
           max-height: 170px;
           overflow: hidden;
         }
+
         .mesoFade{
           pointer-events:none;
           position:absolute;
@@ -595,13 +606,17 @@ export default function ServicesExplorer() {
         }
 
         .serviceMore{
-          margin-top: 16px;
+          margin-top: auto;
+          padding-top: 16px;
           color: rgba(46,42,37,0.82);
           font-weight: 600;
           display:inline-flex;
           align-items:center;
           gap: 10px;
+          position: relative;
+          z-index: 1;
         }
+
         .arrow{ display:inline-block; transform: translateX(0); transition: transform 220ms ease; }
         .serviceCard:hover .arrow{ transform: translateX(3px); }
 
@@ -616,7 +631,6 @@ export default function ServicesExplorer() {
         }
         .serviceCard:hover .glow{ opacity: 1; }
 
-        /* MODAL CONTENT */
         .modal{ border-radius: 22px; overflow:hidden; background: rgba(250,244,236,0.92); }
         .modalHero{ height: 320px; background-size: cover; background-position: center; }
         .modalBody{ padding: 22px; }
@@ -691,7 +705,6 @@ export default function ServicesExplorer() {
         }
         .cta:hover{ transform: translateY(-1px); opacity: .96; }
 
-        /* PRODUCTS */
         .productsGrid{
           margin-top: 18px;
           display:grid;
@@ -743,7 +756,6 @@ export default function ServicesExplorer() {
         }
         .productLink:hover{ border-bottom-color: rgba(184,150,74,0.70); }
 
-        /* MOBILE */
         @media (max-width: 900px){
           .wrap{ padding: 10px 0 26px; }
 
@@ -781,6 +793,7 @@ export default function ServicesExplorer() {
             padding: 14px;
             border-radius: 18px;
           }
+
           .catTitle{ font-size: 24px; }
           .catDesc{ font-size: 13px; line-height: 1.45; }
 
@@ -795,7 +808,13 @@ export default function ServicesExplorer() {
             align-items: flex-start;
             gap: 10px;
           }
-          .servicesActions{ width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+
+          .servicesActions{
+            width: 100%;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+          }
+
           .servicesTitle{ font-size: 22px; }
           .servicesHint{ font-size: 13px; }
 
@@ -810,24 +829,27 @@ export default function ServicesExplorer() {
           }
 
           .serviceImg{ height: 210px; }
-          .serviceBody{ padding: 16px; }
+          .serviceBody{
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+          }
+
           .serviceName{ font-size: 22px; line-height: 1.15; }
 
-          /* ✅ MOBILE meta: force same contrast for both duration + price */
           .serviceMeta{
             margin-top: 10px;
             font-family: ui-serif;
             font-size: 16px;
             font-weight: 650;
             letter-spacing: 0.01em;
-
             color: rgba(110, 84, 28, 0.92) !important;
             background: rgba(255,255,255,0.62);
             border: 1px solid rgba(110, 84, 28, 0.24);
             padding: 7px 10px;
             border-radius: 999px;
             box-shadow: 0 10px 26px rgba(0,0,0,0.06);
-
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -839,7 +861,6 @@ export default function ServicesExplorer() {
             color: rgba(110, 84, 28, 0.70);
           }
 
-          /* ✅ IMPORTANT: this was overriding your price color */
           .serviceMeta span:last-child{
             font-family: ui-serif;
             font-weight: 650;
@@ -849,7 +870,6 @@ export default function ServicesExplorer() {
             text-shadow: none;
           }
 
-          /* “as was”: clamp subtitle on mobile */
           .serviceSub{
             margin-top: 10px;
             font-size: 14px;
@@ -860,18 +880,22 @@ export default function ServicesExplorer() {
             overflow: hidden;
           }
 
-          /* Mesotherapy fade still allowed on mobile */
           .serviceSub--meso{
             display: block;
             overflow: visible;
           }
+
           .serviceSub--meso .mesoText{
             font-size: 14px;
             line-height: 1.6;
             max-height: 150px;
           }
 
-          .serviceMore{ margin-top: 12px; font-size: 14px; }
+          .serviceMore{
+            margin-top: auto;
+            padding-top: 12px;
+            font-size: 14px;
+          }
 
           .modalHero{ height: 220px; }
           .modalBody{ padding: 18px; }
@@ -882,6 +906,7 @@ export default function ServicesExplorer() {
             font-weight: 500;
             max-width: 72%;
           }
+
           .modalPrice{ font-size: 20px; font-weight: 500; }
           .modalText, .list{ font-size: 16px; }
           .modalSectionTitle{ font-size: 20px; }
