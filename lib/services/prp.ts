@@ -28,15 +28,22 @@ export const prp: Service[] = [
         group: "Skin Rejuvenation",
         title: "PRP Face + Neck Treatment",
         subtitle:
-            "Rejuvenate your skin naturally with PRP for the face and neck. This treatment helps improve tone, texture, and overall skin vitality.",
+            "Rejuvenate your skin naturally with Platelet-Rich Plasma (PRP) therapy for the face and neck. This advanced regenerative treatment uses your body’s own growth factors to stimulate collagen production, improve skin texture, and enhance overall skin vitality. PRP helps restore smoother, firmer, and more radiant-looking skin while supporting natural skin regeneration. A powerful natural treatment designed to refresh and revitalize the skin from within.",
         duration: "90 minutes",
         price: "$450",
         benefits: [
-            "Targets face and neck together",
-            "Supports firmer-looking skin",
-            "Improves overall texture",
+            "Treats both face and neck in one session",
+            "Stimulates natural collagen production",
+            "Improves skin firmness and elasticity",
+            "Enhances overall skin texture and tone",
+            "Promotes a healthy, natural glow",
         ],
-        whoFor: ["Face and neck rejuvenation", "Early signs of aging", "Skin texture concerns"],
+        whoFor: [
+            "Early signs of aging",
+            "Dull skin",
+            "Uneven texture",
+            "Loss of firmness",
+        ],
         image: "",
     },
     {

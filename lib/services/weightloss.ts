@@ -20,17 +20,22 @@ export const weightloss: Service[] = [
     {
         slug: "medically-managed-weight-loss-new-patient",
         categoryId: "weightloss",
-        title: "Medically Managed Weight Loss- New Patient",
+        title: "Medically Managed Weight Loss - New Patient",
         subtitle:
-            "GLP-1 Medical Weight Management Program. Our medically supervised weight management program is designed to support safe, structured, and sustainable results.",
+            "Begin your journey with our medically supervised weight management program designed to support safe, structured, and sustainable weight loss. During this initial consultation, we evaluate your health history, discuss your goals, and determine if GLP-1 therapy or other medical weight management options are appropriate for you. Our personalized approach focuses on achieving long-term, healthy results through expert medical guidance and individualized treatment planning. A personalized medical approach designed to support safe and lasting results.",
         duration: "30 minutes",
         price: "",
         benefits: [
-            "Initial medical evaluation",
-            "Program eligibility review",
-            "Personalized treatment roadmap",
+            "Comprehensive medical evaluation",
+            "Personalized treatment strategy",
+            "GLP-1 program eligibility assessment",
+            "Professional guidance for sustainable weight loss",
         ],
-        whoFor: ["New patients", "Patients starting a GLP-1 program", "Medical weight loss consultation"],
+        whoFor: [
+            "New patients",
+            "Patients starting a GLP-1 program",
+            "Medical weight loss consultation",
+        ],
         image: "",
     },
 ];

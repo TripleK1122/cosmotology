@@ -193,13 +193,14 @@ export const facial: Service[] = [
         categoryId: "facial",
         title: "Microneedling with Exosomes",
         subtitle:
-            "Microneedling + exosomes stimulate skin repair, reduce fine lines, scars, and pigmentation, leaving your skin smoother and more radiant.",
+            "Microneedling with exosomes is an advanced skin rejuvenation treatment that helps improve skin quality and support natural regeneration. Exosomes contain powerful growth factors and signaling molecules that help stimulate collagen production, support skin repair, and improve overall skin texture.\n\nCombined with microneedling, this treatment helps reduce the appearance of fine lines, scars, and pigmentation while leaving the skin smoother, brighter, and more refreshed.",
         duration: "60 minutes",
         price: "$299",
         benefits: [
-            "Enhanced skin renewal support",
-            "Helps with pigmentation and scars",
-            "Improves texture and glow",
+            "Stimulates collagen production",
+            "Supports advanced skin regeneration",
+            "Helps reduce scars and pigmentation",
+            "Improves skin texture and radiance",
         ],
         whoFor: ["Scarring", "Pigmentation", "Fine lines", "Texture concerns"],
         image: "",
@@ -210,7 +211,7 @@ export const facial: Service[] = [
         categoryId: "facial",
         title: "Oxygen Facial Treatment",
         subtitle:
-            "Oxygen Facial is an advanced oxygen treatment designed for tired, dull, or dehydrated skin to restore brightness and vitality.",
+            "Oxygen Facial is an advanced oxygen treatment designed for tired, dull, or dehydrated skin to restore brightness and vitality. This facial helps deliver oxygen and nourishing ingredients to the skin, improving hydration, supporting circulation, and restoring a healthy, radiant appearance.\n\nThe skin looks smoother, brighter, and more refreshed after the treatment.",
         duration: "90 minutes",
         price: "$150",
         benefits: [
@@ -227,13 +228,14 @@ export const facial: Service[] = [
         categoryId: "facial",
         title: "Peptide Firming & Sculpt Facial",
         subtitle:
-            "A sculpting, collagen-activating treatment designed to visibly lift, firm, and improve skin elasticity.",
+            "A firming and sculpting facial designed to improve skin elasticity and support collagen production. This treatment includes a peptide-rich mask that helps nourish the skin, enhance firmness, and restore a smoother, more lifted appearance.\n\nPeptides help strengthen the skin and promote a healthier, more youthful-looking complexion.",
         duration: "90 minutes",
         price: "$145",
         benefits: [
-            "Supports firmness",
-            "Improves elasticity",
-            "Sculpting-focused facial care",
+            "Supports collagen production",
+            "Improves firmness and elasticity",
+            "Peptide-rich skin nourishment",
+            "Promotes smoother, lifted appearance",
         ],
         whoFor: ["Loss of firmness", "Early aging signs"],
         image: "",

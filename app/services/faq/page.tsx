@@ -50,7 +50,7 @@ const sections = [
             },
             {
                 q: "How is PRP prepared?",
-                a: "A small blood sample is taken and spun in a centrifuge to separate and concentrate platelets. The PRP is then applied or injected into the treatment area.",
+                a: "A small blood sample is collected and processed in a centrifuge to separate and concentrate the platelets. The PRP is then applied or injected into the treatment area to support skin rejuvenation and tissue repair.",
             },
             {
                 q: "Is PRP safe?",
@@ -83,7 +83,7 @@ const sections = [
         items: [
             {
                 q: "What is microneedling and how does it work?",
-                a: "Microneedling uses tiny sterile needles to create micro-channels in the skin. This triggers collagen production and improves texture and tone.",
+                a: "Microneedling is a minimally invasive skin rejuvenation treatment that uses very fine sterile needles to stimulate the skin’s natural collagen production. It helps improve skin texture, reduce the appearance of fine lines and scars, and promote smoother, healthier-looking skin",
             },
             {
                 q: "What skin concerns does microneedling treat?",
