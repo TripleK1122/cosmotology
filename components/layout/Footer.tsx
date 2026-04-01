@@ -57,9 +57,9 @@ export default function Footer() {
               <div className="ftInfoRow">
                 <div className="ftInfoKey">Hours</div>
                 <div className="ftInfoVal">
-                  <div>Mon–Thu · 9:00–20:00</div>
-                  <div>Fri · 8:00–18:00</div>
-                  <div>Sat · 9:00–17:00</div>
+                  <div>Mon–Thu · 9:00am –8:00pm</div>
+                  <div>Fri · 8:00am – 6:00pm</div>
+                  <div>Sat · 9:00am – 5:00pm</div>
                   <div>Sunday · Closed</div>
                 </div>
               </div>
