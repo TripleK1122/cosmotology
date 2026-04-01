@@ -179,7 +179,7 @@ export default function ContactPage() {
                                     <div>Mon–Thu · 9:00–20:00</div>
                                     <div>Fri · 8:00–18:00</div>
                                     <div>Sat · 9:00–17:00</div>
-                                    <div>Sunday · By request</div>
+                                    <div>Sunday · Closed</div>
                                 </div>
                             </div>
 
