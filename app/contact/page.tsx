@@ -12,11 +12,9 @@ const CONTACT = {
     instagramHandle: "@janetesthetics",
     instagramUrl: "https://www.instagram.com/janet_esthetics/",
 
-    // ✅ IMPORTANT: keep ONLY the src URL (no <iframe> tag)
     mapEmbedSrc:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2958.244620850394!2d-87.9124952231376!3d42.14505187121383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fbec93cf09e81%3A0xc349b27cae197f5!2s325%20N%20Milwaukee%20Ave%20g1%2C%20Wheeling%2C%20IL%2060090!5e0!3m2!1sru!2sus!4v1768883069528!5m2!1sru!2sus",
 
-    // (optional) link button to open Google Maps
     mapOpenUrl: "https://maps.app.goo.gl/gmS8Ku8kfoCDVHYg9",
 };
 
@@ -33,13 +31,11 @@ export default function ContactPage() {
                 </header>
 
                 <div className="je-contact__grid">
-                    {/* LEFT */}
                     <div className="je-contact__left">
                         <div className="je-contact__card">
                             <div className="je-contact__cardTitle">Studio Information</div>
 
                             <div className="je-contact__rows">
-                                {/* Location */}
                                 <div className="je-contact__row">
                                     <div className="je-contact__icon" aria-hidden="true">
                                         <svg viewBox="0 0 24 24" fill="none">
@@ -66,7 +62,6 @@ export default function ContactPage() {
                                     </div>
                                 </div>
 
-                                {/* Phone */}
                                 <div className="je-contact__row">
                                     <div className="je-contact__icon" aria-hidden="true">
                                         <svg viewBox="0 0 24 24" fill="none">
@@ -87,7 +82,6 @@ export default function ContactPage() {
                                     </div>
                                 </div>
 
-                                {/* Email */}
                                 <div className="je-contact__row">
                                     <div className="je-contact__icon" aria-hidden="true">
                                         <svg viewBox="0 0 24 24" fill="none">
@@ -113,7 +107,6 @@ export default function ContactPage() {
                                     </div>
                                 </div>
 
-                                {/* Instagram */}
                                 <div className="je-contact__row">
                                     <div className="je-contact__icon" aria-hidden="true">
                                         <svg viewBox="0 0 24 24" fill="none">
@@ -154,20 +147,39 @@ export default function ContactPage() {
                         </div>
 
                         <div className="je-contact__card je-contact__hours">
-                            <div className="je-contact__cardTitle">Business Hours</div>
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "120px 1fr",
+                                    gap: "22px",
+                                    alignItems: "start",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        fontSize: "12px",
+                                        letterSpacing: "0.28em",
+                                        textTransform: "uppercase",
+                                        color: "rgba(46, 42, 37, 0.5)",
+                                        paddingTop: "4px",
+                                    }}
+                                >
+                                    Hours
+                                </div>
 
-                            <div className="je-contact__hoursGrid">
-                                <div className="je-contact__hoursRow">
-                                    <span>Tuesday – Friday</span>
-                                    <span className="je-contact__hoursRight">10:00 AM – 7:00 PM</span>
-                                </div>
-                                <div className="je-contact__hoursRow">
-                                    <span>Saturday</span>
-                                    <span className="je-contact__hoursRight">9:00 AM – 5:00 PM</span>
-                                </div>
-                                <div className="je-contact__hoursRow">
-                                    <span>Sunday – Monday</span>
-                                    <span className="je-contact__hoursRight">Closed</span>
+                                <div
+                                    style={{
+                                        display: "grid",
+                                        gap: "10px",
+                                        color: "rgba(46, 42, 37, 0.72)",
+                                        fontSize: "18px",
+                                        lineHeight: "1.45",
+                                    }}
+                                >
+                                    <div>Mon–Thu · 9:00–20:00</div>
+                                    <div>Fri · 8:00–18:00</div>
+                                    <div>Sat · 9:00–17:00</div>
+                                    <div>Sunday · By request</div>
                                 </div>
                             </div>
 
@@ -175,7 +187,6 @@ export default function ContactPage() {
                         </div>
                     </div>
 
-                    {/* RIGHT: MAP */}
                     <div className="je-contact__mapCard">
                         <div className="je-contact__mapTop">
                             <div className="je-contact__mapTitle">Directions</div>
@@ -183,7 +194,6 @@ export default function ContactPage() {
                                 Tap “View larger map” for navigation.
                             </div>
 
-                            {/* optional button */}
                             <div style={{ marginTop: 10 }}>
                                 <a
                                     className="je-contact__link"
@@ -212,4 +222,4 @@ export default function ContactPage() {
             </Container>
         </section>
     );
-}
+} 
