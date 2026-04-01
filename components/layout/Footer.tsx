@@ -4,78 +4,77 @@ import Link from "next/link";
 import Container from "@/components/layout/Container";
 
 export default function Footer() {
-    return (
-        <footer className="ft">
-            <Container>
-                {/* Top */}
-                <div className="ftTop">
-                    {/* Brand */}
-                    <div className="ftBrand">
-                        <div className="ftLogo">Janet Esthetics</div>
-                        <p className="ftDesc">
-                            Private esthetic studio for curated, results-driven skincare.
-                            A calm space where beauty meets serenity.
-                        </p>
+  return (
+    <footer className="ft">
+      <Container>
+        {/* Top */}
+        <div className="ftTop">
+          {/* Brand */}
+          <div className="ftBrand">
+            <div className="ftLogo">Janet Esthetics</div>
+            <p className="ftDesc">
+              Private esthetic studio for curated, results-driven skincare.
+              A calm space where beauty meets serenity.
+            </p>
 
-                        <div className="ftActions">
-                            <Link className="ftPill" href="https://www.instagram.com/janet_esthetics/" target="_blank" rel="noreferrer">
-                                <span className="ftPillLabel">Instagram</span>
-                                <span className="ftPillDot" />
-                                <span className="ftPillValue">@janetesthetics</span>
-                            </Link>
-                        </div>
-                    </div>
+            <div className="ftActions">
+              <Link className="ftPill" href="https://www.instagram.com/janet_esthetics/" target="_blank" rel="noreferrer">
+                <span className="ftPillLabel">Instagram</span>
+                <span className="ftPillDot" />
+                <span className="ftPillValue">@janetesthetics</span>
+              </Link>
+            </div>
+          </div>
 
-                    {/* Explore */}
-                    <div className="ftCol">
-                        <div className="ftKicker">Explore</div>
-                        <div className="ftLinks">
-                            <Link className="ftLink" href="/about">About</Link>
-                            <Link className="ftLink" href="/services">Services</Link>
-                            <Link className="ftLink" href="/reviews">Reviews</Link>
-                            <Link className="ftLink" href="/booking">Booking</Link>
-                            <Link className="ftLink" href="/contact">Contact</Link>
-                        </div>
-                    </div>
+          {/* Explore */}
+          <div className="ftCol">
+            <div className="ftKicker">Explore</div>
+            <div className="ftLinks">
+              <Link className="ftLink" href="/about">About</Link>
+              <Link className="ftLink" href="/services">Services</Link>
+              <Link className="ftLink" href="/booking">Booking</Link>
+              <Link className="ftLink" href="/contact">Contact</Link>
+            </div>
+          </div>
 
-                    {/* Connect */}
-                    <div className="ftCol">
-                        <div className="ftKicker">Connect</div>
+          {/* Connect */}
+          <div className="ftCol">
+            <div className="ftKicker">Connect</div>
 
-                        <div className="ftInfo">
-                            <div className="ftInfoRow">
-                                <div className="ftInfoKey">Phone</div>
-                                <div className="ftInfoVal">847-454-4749</div>
-                            </div>
+            <div className="ftInfo">
+              <div className="ftInfoRow">
+                <div className="ftInfoKey">Phone</div>
+                <div className="ftInfoVal">847-454-4749</div>
+              </div>
 
-                            <div className="ftInfoRow">
-                                <div className="ftInfoKey">Email</div>
-                                <div className="ftInfoVal">ztsybulyak@yahoo.com</div>
-                            </div>
+              <div className="ftInfoRow">
+                <div className="ftInfoKey">Email</div>
+                <div className="ftInfoVal">ztsybulyak@yahoo.com</div>
+              </div>
 
-                            <div className="ftRule" />
+              <div className="ftRule" />
 
-                            <div className="ftInfoRow">
-                                <div className="ftInfoKey">Hours</div>
-                                <div className="ftInfoVal">
-                                    Mon–Sat · 10:00–19:00
-                                    <br />
-                                    Sunday · By request
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              <div className="ftInfoRow">
+                <div className="ftInfoKey">Hours</div>
+                <div className="ftInfoVal">
+                  Mon–Sat · 10:00–19:00
+                  <br />
+                  Sunday · By request
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                {/* Bottom */}
-                <div className="ftBottom">
-                    <div className="ftCopy">© {new Date().getFullYear()} Janet Esthetics. All rights reserved.</div>
+        {/* Bottom */}
+        <div className="ftBottom">
+          <div className="ftCopy">© {new Date().getFullYear()} Janet Esthetics. All rights reserved.</div>
 
 
-                </div>
-            </Container>
+        </div>
+      </Container>
 
-            <style>{`
+      <style>{`
         .ft{
           margin-top: 80px;
           position: relative;
@@ -257,6 +256,6 @@ export default function Footer() {
           }
         }
       `}</style>
-        </footer>
-    );
+    </footer>
+  );
 }

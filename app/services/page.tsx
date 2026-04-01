@@ -1,6 +1,5 @@
 import Container from "@/components/layout/Container";
 import ServicesExplorer from "@/components/blocks/ServicesExplorer";
-import ResultsPremium from "@/components/blocks/ResultsPremium";
 
 export const metadata = {
     title: "Services | Janet Esthetics",
@@ -23,8 +22,6 @@ export default function ServicesPage() {
                     </div>
                 </Container>
             </section>
-
-            <ResultsPremium />
         </>
     );
 }

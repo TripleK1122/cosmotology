@@ -49,8 +49,7 @@ export default function BookingPage() {
                         <div className="je-booking__row">
                             <div className="je-booking__rowTitle">Before your appointment</div>
                             <div className="je-booking__rowText">
-                                You’ll receive a confirmation email with preparation guidelines
-                                and studio details within 24 hours.
+                                You’ll receive a confirmation email with preparation guidelines, studio details and a link to complete your New Patient and Medical History forms within 24 hours.
                             </div>
                         </div>
 

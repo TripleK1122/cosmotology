@@ -9,36 +9,66 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const cases = [
   {
-    title: "Hydra Facial",
+    title: "Peptide Firming Sculpt Facial",
     subtitle: "Texture + glow refinement",
     before: "/images/results/case-01-before.jpg",
     after: "/images/results/case-01-after.jpg",
   },
   {
-    title: "Chemical Peel",
-    subtitle: "Tone clarity + smoothness",
-    before: "/images/results/case-02-before.jpg",
-    after: "/images/results/case-02-after.jpg",
-  },
-  {
-    title: "LED Therapy",
+    title: "Advanced Customized Facial",
     subtitle: "Calm + recovery support",
     before: "/images/results/case-03-before.jpg",
     after: "/images/results/case-03-after.jpg",
   },
-  {
-    title: "Signature Facial",
-    subtitle: "Balanced, healthy finish",
-    before: "/images/results/case-04-before.jpg",
-    after: "/images/results/case-04-after.jpg",
-  },
 
-  // NEW
   {
     title: "Mesotherapy",
     subtitle: "Skin texture + rejuvenation",
     before: "/images/results/mesotherapy-before.jpg",
     after: "/images/results/mesotherapy-after.jpg",
+  },
+  {
+    title: "LED Light Therapy Facial",
+    subtitle: "Soothing support + skin recovery",
+    before: "/images/results/led-light-therapy-facial-before.jpg",
+    after: "/images/results/led-light-therapy-facial-after.jpg",
+  },
+  {
+    title: "Men’s Facial Treatment",
+    subtitle: "Deep cleansing + skin balance",
+    before: "/images/results/mens-facial-1-before.jpg",
+    after: "/images/results/mens-facial-1-after.jpg",
+  },
+  {
+    title: "Men’s Facial Treatment",
+    subtitle: "Texture improvement + hydration",
+    before: "/images/results/mens-facial-2-before.jpg",
+    after: "/images/results/mens-facial-2-after.jpg",
+  },
+
+  {
+    title: "PRP Hair Treatment",
+    subtitle: "Hair density + scalp revitalization",
+    before: "/images/results/prp-hair-1-before.jpg",
+    after: "/images/results/prp-hair-1-after.jpg",
+  },
+  {
+    title: "PRP Hair Treatment",
+    subtitle: "Hair regrowth + strengthening",
+    before: "/images/results/prp-hair-2-before.jpg",
+    after: "/images/results/prp-hair-2-after.jpg",
+  },
+  {
+    title: "Acne Clarifying Facial",
+    subtitle: "Breakout control + clearer texture",
+    before: "/images/results/acne-clarifying-facial-before.jpg",
+    after: "/images/results/acne-clarifying-facial-after.jpg",
+  },
+  {
+    title: "Microneedling with Exosomes",
+    subtitle: "Advanced renewal + skin repair",
+    before: "/images/results/microneedling-exosomes-before.jpg",
+    after: "/images/results/microneedling-exosomes-after.jpg",
   },
 ] as const;
 
